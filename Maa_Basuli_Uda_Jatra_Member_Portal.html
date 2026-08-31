@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maa Basuli Uda Jatra Committee</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<style>
+:root{--red:#a40000;--red2:#e21b23;--silver:#e9edf2;--dark:#260909;--gold:#f2b84b}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Oriya","Noto Sans",Arial,sans-serif;background:#faf6f5;color:#2d1616}
+header{background:linear-gradient(135deg,#650000,#b40000,#e21b23);color:#fff;padding:24px 16px;box-shadow:0 4px 18px #0003}
+.header{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(24px,5vw,42px)}header p{margin:5px 0}
+nav{max-width:1100px;margin:18px auto 0;display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;padding:9px 13px;border:1px solid #ffffff55;border-radius:22px;font-size:14px}
+.hero{max-width:1100px;margin:auto;padding:55px 18px;text-align:center}
+.hero h2{font-size:clamp(34px,7vw,62px);color:var(--red);margin:15px 0 5px}
+.hero p{font-size:20px;line-height:1.8}
+.btn{border:0;background:var(--red2);color:#fff;padding:11px 17px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:4px}
+.btn.secondary{background:#444}.btn.silver{background:#5d6872}
+section{max-width:1100px;margin:auto;padding:28px 18px}.title{text-align:center;color:var(--red);font-size:31px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 5px 25px #3d000015;border:1px solid #ead6d6;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:5px 0 12px;font-size:15px}
+label{font-weight:bold;font-size:14px}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:11px;border-bottom:1px solid #eee;text-align:left;font-size:14px}th{background:#f7e8e8;color:var(--red)}
+.status{padding:5px 9px;border-radius:15px;font-weight:bold;font-size:12px}.paid{background:#dff5e3;color:#08752a}.pending{background:#fff0d4;color:#8a5500}
+.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.social a{color:#fff;text-decoration:none;padding:18px;text-align:center;border-radius:12px;font-weight:bold}.ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045)}.fb{background:#1877f2}.x{background:#111}.yt{background:#e62117}
+.admin{display:none}.admin.active{display:block}.member-card{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.member-card img{width:90px;height:90px;object-fit:cover;border-radius:12px;border:3px solid var(--red)}
+.qrbox{text-align:center}.qrbox canvas{max-width:180px}.small{font-size:13px;color:#666}
+footer{background:#260909;color:#fff;text-align:center;padding:25px;line-height:1.8}
+.notice{border-left:5px solid var(--red);background:#fff1f1;padding:15px;border-radius:8px}
+@media(max-width:650px){table{font-size:12px}th,td{padding:8px}.header{justify-content:center;text-align:center}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header">
+<div><h1>🌺 ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</h1><p>ଠାକୁରମୁଣ୍ଡା, ମୟୂରଭଞ୍ଜ, ଓଡ଼ିଶା</p></div>
+<button class="btn silver" onclick="showAdmin()">Admin Login</button>
+</div>
+<nav>
+<a href="#home">ମୁଖ୍ୟ ପୃଷ୍ଠା</a><a href="#members">ସଦସ୍ୟ</a><a href="#fee">Fee Status</a><a href="#qr">QR Verification</a><a href="#live">Live</a><a href="#social">Social Media</a><a href="#contact">ଯୋଗାଯୋଗ</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="card">
+<div style="font-size:48px">🙏</div>
+<h2>ଜୟ ମା ବାସୁଳୀ</h2>
+<p><b>ପରମ୍ପରା • ଭକ୍ତି • ଏକତା • ସେବା</b></p>
+<p>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟିର ଅଧିକାରିକ ଡିଜିଟାଲ୍ ପ୍ଲାଟଫର୍ମ।</p>
+<a class="btn" href="#members">ସଦସ୍ୟ ତାଲିକା</a>
+<a class="btn" href="#social">ଆମ ସହ ଯୋଡ଼ି ହୁଅନ୍ତୁ</a>
+</div>
+</section>
+
+<section id="members">
+<h2 class="title">👥 କମିଟି ସଦସ୍ୟ</h2>
+<div class="card">
+<input id="search" placeholder="ସଦସ୍ୟଙ୍କ ନାମ କିମ୍ବା Member ID ଖୋଜନ୍ତୁ..." oninput="renderMembers()">
+<div id="memberList"></div>
+</div>
+</section>
+
+<section id="fee">
+<h2 class="title">💰 Live Member Fee Status</h2>
+<div class="card">
+<div id="feeList"></div>
+</div>
+</section>
+
+<section id="qr">
+<h2 class="title">🎫 QR ID Verification</h2>
+<div class="card">
+<p>Member ID ଦିଅନ୍ତୁ ଏବଂ QR verification page ଦେଖନ୍ତୁ।</p>
+<input id="verifyId" placeholder="ଉଦାହରଣ: MB001">
+<button class="btn" onclick="verifyMember()">Verify Member</button>
+<div id="verifyResult"></div>
+</div>
+</section>
+
+<section id="live">
+<h2 class="title">🔴 Live Telecast</h2>
+<div class="card" style="text-align:center">
+<h3>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା — YouTube Live</h3>
+<p>Live stream ଚାଲୁ ହେଲେ ଏହି link ରେ ଯୋଡ଼ାଯାଇପାରିବ।</p>
+<a class="btn" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube Channel</a>
+</div>
+</section>
+
+<section id="social">
+<h2 class="title">📱 ଆମ ସୋସିଆଲ ମିଡିଆ</h2>
+<div class="social">
+<a class="ig" href="https://www.instagram.com/jaymaabasuli?igsh=bTI3ajJ3NjhqaW44" target="_blank">Instagram<br>@jaymaabasuli</a>
+<a class="fb" href="https://www.facebook.com/share/14mPPFBt8e4/" target="_blank">Facebook<br>@jaymaabasuli</a>
+<a class="x" href="https://x.com/JayMaaBasuli" target="_blank">X<br>@JayMaaBasuli</a>
+<a class="yt" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube<br>@jaymaabasuli</a>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="title">📞 ଯୋଗାଯୋଗ</h2>
+<div class="card">
+<p><b>Mobile:</b> <a href="tel:8917437067">8917437067</a></p>
+<p><b>Email:</b> <a href="mailto:maabasuliudajatracommittee@gmail.com">maabasuliudajatracommittee@gmail.com</a></p>
+</div>
+</section>
+
+<section id="admin" class="admin">
+<h2 class="title">🔐 Admin Panel</h2>
+<div class="card">
+<p class="small">Demo admin: ଏହି browser ରେ member data save ହେବ। Online ରେ ସମସ୍ତ mobile ରେ live update ପାଇଁ database/hosting connect କରିବା ଦରକାର।</p>
+<form onsubmit="addMember(event)">
+<div class="grid">
+<div><label>Member ID</label><input id="mid" required placeholder="MB001"></div>
+<div><label>ସଦସ୍ୟଙ୍କ ନାମ</label><input id="mname" required></div>
+<div><label>ପଦବୀ</label><input id="mrole" placeholder="Core Committee Member"></div>
+<div><label>ମୋବାଇଲ୍</label><input id="mphone"></div>
+<div><label>ଗାଁ/ଠିକଣା</label><input id="maddress"></div>
+<div><label>Fee Status</label><select id="mfee"><option value="PAID">PAID</option><option value="PENDING">PENDING</option></select></div>
+</div>
+<button class="btn" type="submit">➕ Add Member</button>
+<button class="btn secondary" type="button" onclick="hideAdmin()">Close Admin</button>
+</form>
+</div>
+<div class="card"><h3>Current Members</h3><div id="adminList"></div></div>
+</section>
+
+<footer>
+<b>🌺 ଜୟ ମା ବାସୁଳୀ 🙏</b><br>
+ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି, ଠାକୁରମୁଣ୍ଡା<br>
+<span class="small" style="color:#ddd">Digital Committee Portal</span>
+</footer>
+
+<script>
+const KEY="maa_basuli_members_v1";
+let members=JSON.parse(localStorage.getItem(KEY)||"null")||[
+{id:"MB001",name:"Sample Member",role:"Core Committee Member",phone:"",address:"ଠାକୁରମୁଣ୍ଡା",fee:"PAID"}
+];
+function save(){localStorage.setItem(KEY,JSON.stringify(members))}
+function renderMembers(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const arr=members.filter(m=>(m.name+" "+m.id+" "+m.role).toLowerCase().includes(q));
+ document.getElementById("memberList").innerHTML=arr.length?arr.map(m=>`
+ <div class="member-card card">
+ <div><div style="font-size:38px">👤</div></div>
+ <div style="flex:1"><h3 style="margin:0;color:#a40000">${esc(m.name)}</h3><p>${esc(m.role||"Member")}<br><b>Member ID:</b> ${esc(m.id)}<br>${esc(m.address||"")}</p>
+ <span class="status ${m.fee==="PAID"?"paid":"pending"}">${m.fee}</span></div>
+ <div class="qrbox"><canvas id="qr-${esc(m.id)}" width="150" height="150"></canvas><div class="small">Scan to verify</div></div>
+ </div>`).join(""):"<p>କୌଣସି ସଦସ୍ୟ ମିଳିଲେ ନାହିଁ।";
+ arr.forEach(m=>makeQR(m));
+ renderFee();renderAdmin();
+}
+function makeQR(m){
+ const c=document.getElementById("qr-"+m.id); if(!c||!window.QRious)return;
+ new QRious({element:c,size:150,value:location.href.split("#")[0]+"#verify="+encodeURIComponent(m.id)});
+}
+function renderFee(){
+ document.getElementById("feeList").innerHTML=members.map(m=>`<div class="card" style="margin:8px 0"><b>${esc(m.name)}</b> — ${esc(m.id)} <span style="float:right" class="status ${m.fee==="PAID"?"paid":"pending"}">${m.fee}</span></div>`).join("");
+}
+function renderAdmin(){
+ const box=document.getElementById("adminList"); if(!box)return;
+ box.innerHTML=members.map((m,i)=>`<div class="card"><b>${esc(m.id)} — ${esc(m.name)}</b><br>${esc(m.role)} | Fee: ${m.fee}<br><button class="btn" onclick="toggleFee(${i})">Change Fee</button> <button class="btn secondary" onclick="removeMember(${i})">Delete</button></div>`).join("");
+}
+function addMember(e){e.preventDefault();let id=document.getElementById("mid").value.trim();if(members.some(x=>x.id===id)){alert("ଏହି Member ID ପୂର୍ବରୁ ଅଛି");return}
+members.push({id,name:document.getElementById("mname").value.trim(),role:document.getElementById("mrole").value.trim(),phone:document.getElementById("mphone").value.trim(),address:document.getElementById("maddress").value.trim(),fee:document.getElementById("mfee").value});save();e.target.reset();renderMembers();alert("Member successfully added");}
+function toggleFee(i){members[i].fee=members[i].fee==="PAID"?"PENDING":"PAID";save();renderMembers()}
+function removeMember(i){if(confirm("ଏହି member କୁ delete କରିବେ?")){members.splice(i,1);save();renderMembers()}}
+function verifyMember(){
+ let id=document.getElementById("verifyId").value.trim();let m=members.find(x=>x.id.toLowerCase()===id.toLowerCase());
+ document.getElementById("verifyResult").innerHTML=m?`<div class="card" style="margin-top:18px"><h3 style="color:#08752a">✅ Verified Member</h3><p><b>Name:</b> ${esc(m.name)}<br><b>Member ID:</b> ${esc(m.id)}<br><b>Designation:</b> ${esc(m.role)}<br><b>Fee:</b> ${m.fee}</p></div>`:`<div class="card" style="margin-top:18px"><h3 style="color:#b40000">❌ Member Not Found</h3><p>ଦିଆଯାଇଥିବା Member ID ଠିକ୍ ନୁହେଁ।</p></div>`;
+}
+function showAdmin(){let p=prompt("Admin password:");if(p==="1234"){document.getElementById("admin").classList.add("active");location.hash="admin"}else if(p!==null)alert("Wrong password")}
+function hideAdmin(){document.getElementById("admin").classList.remove("active");location.hash="home"}
+function esc(s){return String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[x]))}
+renderMembers();
+if(location.hash.startsWith("#verify=")){document.getElementById("verifyId").value=decodeURIComponent(location.hash.slice(8));verifyMember();document.getElementById("qr").scrollIntoView()}
+</script>
+</body></html>
