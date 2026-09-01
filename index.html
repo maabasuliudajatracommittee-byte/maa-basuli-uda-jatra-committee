@@ -3,179 +3,890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Maa Basuli Uda Jatra Committee</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-:root{--red:#a40000;--red2:#e21b23;--silver:#e9edf2;--dark:#260909;--gold:#f2b84b}
-*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Oriya","Noto Sans",Arial,sans-serif;background:#faf6f5;color:#2d1616}
-header{background:linear-gradient(135deg,#650000,#b40000,#e21b23);color:#fff;padding:24px 16px;box-shadow:0 4px 18px #0003}
-.header{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-h1{margin:0;font-size:clamp(24px,5vw,42px)}header p{margin:5px 0}
-nav{max-width:1100px;margin:18px auto 0;display:flex;gap:8px;flex-wrap:wrap}
-nav a{color:#fff;text-decoration:none;padding:9px 13px;border:1px solid #ffffff55;border-radius:22px;font-size:14px}
-.hero{max-width:1100px;margin:auto;padding:55px 18px;text-align:center}
-.hero h2{font-size:clamp(34px,7vw,62px);color:var(--red);margin:15px 0 5px}
-.hero p{font-size:20px;line-height:1.8}
-.btn{border:0;background:var(--red2);color:#fff;padding:11px 17px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:4px}
-.btn.secondary{background:#444}.btn.silver{background:#5d6872}
-section{max-width:1100px;margin:auto;padding:28px 18px}.title{text-align:center;color:var(--red);font-size:31px}
-.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 5px 25px #3d000015;border:1px solid #ead6d6;margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:5px 0 12px;font-size:15px}
-label{font-weight:bold;font-size:14px}
-table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:11px;border-bottom:1px solid #eee;text-align:left;font-size:14px}th{background:#f7e8e8;color:var(--red)}
-.status{padding:5px 9px;border-radius:15px;font-weight:bold;font-size:12px}.paid{background:#dff5e3;color:#08752a}.pending{background:#fff0d4;color:#8a5500}
-.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.social a{color:#fff;text-decoration:none;padding:18px;text-align:center;border-radius:12px;font-weight:bold}.ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045)}.fb{background:#1877f2}.x{background:#111}.yt{background:#e62117}
-.admin{display:none}.admin.active{display:block}.member-card{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.member-card img{width:90px;height:90px;object-fit:cover;border-radius:12px;border:3px solid var(--red)}
-.qrbox{text-align:center}.qrbox canvas{max-width:180px}.small{font-size:13px;color:#666}
-footer{background:#260909;color:#fff;text-align:center;padding:25px;line-height:1.8}
-.notice{border-left:5px solid var(--red);background:#fff1f1;padding:15px;border-radius:8px}
-@media(max-width:650px){table{font-size:12px}th,td{padding:8px}.header{justify-content:center;text-align:center}}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Odia",sans-serif;
+  background:#f7f7f7;
+  color:#222;
+}
+
+header{
+  background:linear-gradient(135deg,#650000,#e21b23);
+  color:white;
+  padding:22px 16px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-size:26px;
+}
+
+header p{
+  margin:8px 0 0;
+}
+
+nav{
+  background:white;
+  padding:12px;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  box-shadow:0 2px 8px #ccc;
+}
+
+nav a{
+  text-decoration:none;
+  color:#a40000;
+  padding:9px 13px;
+  border:1px solid #ddd;
+  border-radius:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.card{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 2px 10px #ddd;
+  margin-bottom:20px;
+}
+
+h2{
+  color:#a40000;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:7px 0 12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  padding:12px 18px;
+  border-radius:8px;
+  background:#e21b23;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  margin:4px;
+}
+
+button.google{
+  background:#333;
+}
+
+button.secondary{
+  background:#555;
+}
+
+button.logout{
+  background:#777;
+}
+
+.status{
+  padding:10px;
+  border-radius:8px;
+  background:#f1f1f1;
+  margin:10px 0;
+}
+
+.profile{
+  text-align:center;
+}
+
+.profile img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #e21b23;
+  margin:10px;
+}
+
+.member-id{
+  font-size:25px;
+  font-weight:bold;
+  color:#e21b23;
+}
+
+.hidden{
+  display:none;
+}
+
+.member-row{
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:12px;
+  margin:8px 0;
+}
+
+.small{
+  color:#666;
+  font-size:13px;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  background:#260909;
+  color:white;
+  margin-top:30px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="header">
-<div><h1>🌺 ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</h1><p>ଠାକୁରମୁଣ୍ଡା, ମୟୂରଭଞ୍ଜ, ଓଡ଼ିଶା</p></div>
-<button class="btn silver" onclick="showAdmin()">Admin Login</button>
-</div>
-<nav>
-<a href="#home">ମୁଖ୍ୟ ପୃଷ୍ଠା</a><a href="#members">ସଦସ୍ୟ</a><a href="#fee">Fee Status</a><a href="#qr">QR Verification</a><a href="#live">Live</a><a href="#social">Social Media</a><a href="#contact">ଯୋଗାଯୋଗ</a>
-</nav>
+  <h1>🌺 ମା' ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</h1>
+  <p>ଠାକୁରମୁଣ୍ଡା, ମୟୂରଭଞ୍ଜ, ଓଡ଼ିଶା</p>
 </header>
 
-<section class="hero" id="home">
-<div class="card">
-<div style="font-size:48px">🙏</div>
-<h2>ଜୟ ମା ବାସୁଳୀ</h2>
-<p><b>ପରମ୍ପରା • ଭକ୍ତି • ଏକତା • ସେବା</b></p>
-<p>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟିର ଅଧିକାରିକ ଡିଜିଟାଲ୍ ପ୍ଲାଟଫର୍ମ।</p>
-<a class="btn" href="#members">ସଦସ୍ୟ ତାଲିକା</a>
-<a class="btn" href="#social">ଆମ ସହ ଯୋଡ଼ି ହୁଅନ୍ତୁ</a>
-</div>
+<nav>
+  <a href="#home">ମୁଖ୍ୟ ପୃଷ୍ଠା</a>
+  <a href="#login">Login / Signup</a>
+  <a href="#profile">My Profile</a>
+  <a href="#members">Members</a>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+
+<section id="home" class="card">
+  <h2>🙏 ମା' ବାସୁଳୀଙ୍କ ଆଶୀର୍ବାଦ</h2>
+  <p>
+    ମା' ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି,
+    ଠାକୁରମୁଣ୍ଡାର ଅଧିକୃତ ଅନଲାଇନ୍ ପୋର୍ଟାଲ୍।
+  </p>
+
+  <p>
+    ଏଠାରେ କମିଟି ସଦସ୍ୟମାନେ Registration କରି
+    ନିଜର Member ID ଓ Profile ଦେଖିପାରିବେ।
+  </p>
 </section>
 
-<section id="members">
-<h2 class="title">👥 କମିଟି ସଦସ୍ୟ</h2>
-<div class="card">
-<input id="search" placeholder="ସଦସ୍ୟଙ୍କ ନାମ କିମ୍ବା Member ID ଖୋଜନ୍ତୁ..." oninput="renderMembers()">
-<div id="memberList"></div>
+
+<!-- LOGIN / SIGNUP -->
+
+<section id="login" class="card">
+
+<h2>🔐 Member Login / Signup</h2>
+
+<div id="authStatus" class="status">
+  ଦୟାକରି Login କିମ୍ବା Signup କରନ୍ତୁ।
 </div>
+
+<button class="google" onclick="signInWithGoogle()">
+  🔵 Continue with Google
+</button>
+
+<hr>
+
+<h3>📧 Email Signup</h3>
+
+<input
+  type="text"
+  id="signupName"
+  placeholder="ଆପଣଙ୍କ ନାମ"
+>
+
+<input
+  type="email"
+  id="signupEmail"
+  placeholder="Email"
+>
+
+<input
+  type="password"
+  id="signupPassword"
+  placeholder="Password"
+>
+
+<button onclick="signUpWithEmail()">
+  Signup
+</button>
+
+<hr>
+
+<h3>🔑 Email Login</h3>
+
+<input
+  type="email"
+  id="loginEmail"
+  placeholder="Email"
+>
+
+<input
+  type="password"
+  id="loginPassword"
+  placeholder="Password"
+>
+
+<button onclick="signInWithEmail()">
+  Login
+</button>
+
+<button class="logout hidden" id="logoutBtn" onclick="logout()">
+  Logout
+</button>
+
 </section>
 
-<section id="fee">
-<h2 class="title">💰 Live Member Fee Status</h2>
-<div class="card">
-<div id="feeList"></div>
+
+<!-- PROFILE -->
+
+<section id="profile" class="card hidden">
+
+<h2>👤 My Profile</h2>
+
+<div class="profile">
+
+<img id="profilePhoto"
+     src=""
+     alt="Profile Photo">
+
+<h3 id="profileName">-</h3>
+
+<p id="profileEmail">-</p>
+
+<div class="member-id" id="memberId">
+  MB---
 </div>
+
+<p id="designation">Member</p>
+
+<hr>
+
+<h3>📷 Profile Photo Upload</h3>
+
+<input
+  type="file"
+  id="photoFile"
+  accept="image/*"
+>
+
+<button onclick="uploadProfilePhoto()">
+  Upload Photo
+</button>
+
+<div id="uploadStatus" class="status">
+  Photo select କରି Upload କରନ୍ତୁ।
+</div>
+
+</div>
+
 </section>
 
-<section id="qr">
-<h2 class="title">🎫 QR ID Verification</h2>
-<div class="card">
-<p>Member ID ଦିଅନ୍ତୁ ଏବଂ QR verification page ଦେଖନ୍ତୁ।</p>
-<input id="verifyId" placeholder="ଉଦାହରଣ: MB001">
-<button class="btn" onclick="verifyMember()">Verify Member</button>
-<div id="verifyResult"></div>
+
+<!-- MEMBERS -->
+
+<section id="members" class="card">
+
+<h2>👥 Committee Members</h2>
+
+<input
+  type="text"
+  id="memberSearch"
+  placeholder="Member ID ଦ୍ୱାରା Search..."
+  oninput="loadMembers()"
+>
+
+<div id="memberList">
+  Loading...
 </div>
+
 </section>
 
-<section id="live">
-<h2 class="title">🔴 Live Telecast</h2>
-<div class="card" style="text-align:center">
-<h3>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା — YouTube Live</h3>
-<p>Live stream ଚାଲୁ ହେଲେ ଏହି link ରେ ଯୋଡ଼ାଯାଇପାରିବ।</p>
-<a class="btn" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube Channel</a>
 </div>
-</section>
 
-<section id="social">
-<h2 class="title">📱 ଆମ ସୋସିଆଲ ମିଡିଆ</h2>
-<div class="social">
-<a class="ig" href="https://www.instagram.com/jaymaabasuli?igsh=bTI3ajJ3NjhqaW44" target="_blank">Instagram<br>@jaymaabasuli</a>
-<a class="fb" href="https://www.facebook.com/share/14mPPFBt8e4/" target="_blank">Facebook<br>@jaymaabasuli</a>
-<a class="x" href="https://x.com/JayMaaBasuli" target="_blank">X<br>@JayMaaBasuli</a>
-<a class="yt" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube<br>@jaymaabasuli</a>
-</div>
-</section>
-
-<section id="contact">
-<h2 class="title">📞 ଯୋଗାଯୋଗ</h2>
-<div class="card">
-<p><b>Mobile:</b> <a href="tel:8917437067">8917437067</a></p>
-<p><b>Email:</b> <a href="mailto:maabasuliudajatracommittee@gmail.com">maabasuliudajatracommittee@gmail.com</a></p>
-</div>
-</section>
-
-<section id="admin" class="admin">
-<h2 class="title">🔐 Admin Panel</h2>
-<div class="card">
-<p class="small">Demo admin: ଏହି browser ରେ member data save ହେବ। Online ରେ ସମସ୍ତ mobile ରେ live update ପାଇଁ database/hosting connect କରିବା ଦରକାର।</p>
-<form onsubmit="addMember(event)">
-<div class="grid">
-<div><label>Member ID</label><input id="mid" required placeholder="MB001"></div>
-<div><label>ସଦସ୍ୟଙ୍କ ନାମ</label><input id="mname" required></div>
-<div><label>ପଦବୀ</label><input id="mrole" placeholder="Core Committee Member"></div>
-<div><label>ମୋବାଇଲ୍</label><input id="mphone"></div>
-<div><label>ଗାଁ/ଠିକଣା</label><input id="maddress"></div>
-<div><label>Fee Status</label><select id="mfee"><option value="PAID">PAID</option><option value="PENDING">PENDING</option></select></div>
-</div>
-<button class="btn" type="submit">➕ Add Member</button>
-<button class="btn secondary" type="button" onclick="hideAdmin()">Close Admin</button>
-</form>
-</div>
-<div class="card"><h3>Current Members</h3><div id="adminList"></div></div>
-</section>
 
 <footer>
-<b>🌺 ଜୟ ମା ବାସୁଳୀ 🙏</b><br>
-ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି, ଠାକୁରମୁଣ୍ଡା<br>
-<span class="small" style="color:#ddd">Digital Committee Portal</span>
+  © Maa Basuli Uda Jatra Committee, Thakurmunda
 </footer>
 
+
 <script>
-const KEY="maa_basuli_members_v1";
-let members=JSON.parse(localStorage.getItem(KEY)||"null")||[
-{id:"MB001",name:"Sample Member",role:"Core Committee Member",phone:"",address:"ଠାକୁରମୁଣ୍ଡା",fee:"PAID"}
-];
-function save(){localStorage.setItem(KEY,JSON.stringify(members))}
-function renderMembers(){
- const q=(document.getElementById("search")?.value||"").toLowerCase();
- const arr=members.filter(m=>(m.name+" "+m.id+" "+m.role).toLowerCase().includes(q));
- document.getElementById("memberList").innerHTML=arr.length?arr.map(m=>`
- <div class="member-card card">
- <div><div style="font-size:38px">👤</div></div>
- <div style="flex:1"><h3 style="margin:0;color:#a40000">${esc(m.name)}</h3><p>${esc(m.role||"Member")}<br><b>Member ID:</b> ${esc(m.id)}<br>${esc(m.address||"")}</p>
- <span class="status ${m.fee==="PAID"?"paid":"pending"}">${m.fee}</span></div>
- <div class="qrbox"><canvas id="qr-${esc(m.id)}" width="150" height="150"></canvas><div class="small">Scan to verify</div></div>
- </div>`).join(""):"<p>କୌଣସି ସଦସ୍ୟ ମିଳିଲେ ନାହିଁ।";
- arr.forEach(m=>makeQR(m));
- renderFee();renderAdmin();
+
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+"https://nogwmbocptlbgzzpdjny.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_bpa45-FlPLMmt4kBpbveJA_c95Noodr";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+let currentUser = null;
+
+
+/* =====================================================
+   GOOGLE LOGIN
+===================================================== */
+
+async function signInWithGoogle(){
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithOAuth({
+      provider:"google",
+      options:{
+        redirectTo:window.location.origin +
+                   window.location.pathname
+      }
+    });
+
+  if(error){
+    alert("Google Login Error: " + error.message);
+  }
 }
-function makeQR(m){
- const c=document.getElementById("qr-"+m.id); if(!c||!window.QRious)return;
- new QRious({element:c,size:150,value:location.href.split("#")[0]+"#verify="+encodeURIComponent(m.id)});
+
+
+/* =====================================================
+   EMAIL SIGNUP
+===================================================== */
+
+async function signUpWithEmail(){
+
+  const name =
+    document.getElementById("signupName").value.trim();
+
+  const email =
+    document.getElementById("signupEmail").value.trim();
+
+  const password =
+    document.getElementById("signupPassword").value;
+
+  if(!name || !email || !password){
+    alert("Name, Email ଓ Password ଦିଅନ୍ତୁ।");
+    return;
+  }
+
+  if(password.length < 6){
+    alert("Password minimum 6 characters ହେବା ଦରକାର।");
+    return;
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signUp({
+
+      email:email,
+
+      password:password,
+
+      options:{
+        data:{
+          full_name:name
+        },
+
+        emailRedirectTo:
+          window.location.origin +
+          window.location.pathname
+      }
+
+    });
+
+  if(error){
+    alert("Signup Error: " + error.message);
+    return;
+  }
+
+  alert(
+    "Signup successful! Email verification ଦରକାର ହୋଇପାରେ।"
+  );
 }
-function renderFee(){
- document.getElementById("feeList").innerHTML=members.map(m=>`<div class="card" style="margin:8px 0"><b>${esc(m.name)}</b> — ${esc(m.id)} <span style="float:right" class="status ${m.fee==="PAID"?"paid":"pending"}">${m.fee}</span></div>`).join("");
+
+
+/* =====================================================
+   EMAIL LOGIN
+===================================================== */
+
+async function signInWithEmail(){
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if(!email || !password){
+    alert("Email ଓ Password ଦିଅନ୍ତୁ।");
+    return;
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email:email,
+      password:password
+    });
+
+  if(error){
+    alert("Login Error: " + error.message);
+    return;
+  }
+
+  alert("Login successful!");
+
+  await loadUserProfile();
 }
-function renderAdmin(){
- const box=document.getElementById("adminList"); if(!box)return;
- box.innerHTML=members.map((m,i)=>`<div class="card"><b>${esc(m.id)} — ${esc(m.name)}</b><br>${esc(m.role)} | Fee: ${m.fee}<br><button class="btn" onclick="toggleFee(${i})">Change Fee</button> <button class="btn secondary" onclick="removeMember(${i})">Delete</button></div>`).join("");
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+
+  document
+    .getElementById("profile")
+    .classList.add("hidden");
+
+  document
+    .getElementById("logoutBtn")
+    .classList.add("hidden");
+
+  document
+    .getElementById("authStatus")
+    .innerText =
+      "ଆପଣ Logout କରିଛନ୍ତି।";
+
+  alert("Logout successful");
 }
-function addMember(e){e.preventDefault();let id=document.getElementById("mid").value.trim();if(members.some(x=>x.id===id)){alert("ଏହି Member ID ପୂର୍ବରୁ ଅଛି");return}
-members.push({id,name:document.getElementById("mname").value.trim(),role:document.getElementById("mrole").value.trim(),phone:document.getElementById("mphone").value.trim(),address:document.getElementById("maddress").value.trim(),fee:document.getElementById("mfee").value});save();e.target.reset();renderMembers();alert("Member successfully added");}
-function toggleFee(i){members[i].fee=members[i].fee==="PAID"?"PENDING":"PAID";save();renderMembers()}
-function removeMember(i){if(confirm("ଏହି member କୁ delete କରିବେ?")){members.splice(i,1);save();renderMembers()}}
-function verifyMember(){
- let id=document.getElementById("verifyId").value.trim();let m=members.find(x=>x.id.toLowerCase()===id.toLowerCase());
- document.getElementById("verifyResult").innerHTML=m?`<div class="card" style="margin-top:18px"><h3 style="color:#08752a">✅ Verified Member</h3><p><b>Name:</b> ${esc(m.name)}<br><b>Member ID:</b> ${esc(m.id)}<br><b>Designation:</b> ${esc(m.role)}<br><b>Fee:</b> ${m.fee}</p></div>`:`<div class="card" style="margin-top:18px"><h3 style="color:#b40000">❌ Member Not Found</h3><p>ଦିଆଯାଇଥିବା Member ID ଠିକ୍ ନୁହେଁ।</p></div>`;
+
+
+/* =====================================================
+   LOAD CURRENT USER
+===================================================== */
+
+async function checkLogin(){
+
+  const {
+    data:{
+      session
+    }
+  } =
+    await supabaseClient.auth.getSession();
+
+  if(session && session.user){
+
+    currentUser = session.user;
+
+    await loadUserProfile();
+
+  }else{
+
+    currentUser = null;
+
+  }
 }
-function showAdmin(){let p=prompt("Admin password:");if(p==="1234"){document.getElementById("admin").classList.add("active");location.hash="admin"}else if(p!==null)alert("Wrong password")}
-function hideAdmin(){document.getElementById("admin").classList.remove("active");location.hash="home"}
-function esc(s){return String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[x]))}
-renderMembers();
-if(location.hash.startsWith("#verify=")){document.getElementById("verifyId").value=decodeURIComponent(location.hash.slice(8));verifyMember();document.getElementById("qr").scrollIntoView()}
+
+
+/* =====================================================
+   LOAD USER PROFILE
+===================================================== */
+
+async function loadUserProfile(){
+
+  if(!currentUser){
+
+    const {
+      data:{
+        session
+      }
+    } =
+      await supabaseClient.auth.getSession();
+
+    if(!session) return;
+
+    currentUser = session.user;
+  }
+
+  const user =
+    currentUser;
+
+  const { data, error } =
+    await supabaseClient
+      .from("members")
+      .select("*")
+      .eq("user_id",user.id)
+      .single();
+
+  if(error){
+
+    console.log(error);
+
+    document
+      .getElementById("authStatus")
+      .innerText =
+        "Login ହୋଇଛି, କିନ୍ତୁ Member profile ମିଳିଲା ନାହିଁ।";
+
+    return;
+  }
+
+  document
+    .getElementById("profile")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("logoutBtn")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("authStatus")
+    .innerText =
+      "✅ Login ହୋଇଛି।";
+
+  document
+    .getElementById("profileName")
+    .innerText =
+      data.name ||
+      user.user_metadata?.full_name ||
+      "Member";
+
+  document
+    .getElementById("profileEmail")
+    .innerText =
+      data.email ||
+      user.email ||
+      "";
+
+  document
+    .getElementById("memberId")
+    .innerText =
+      data.member_id ||
+      "MB---";
+
+  document
+    .getElementById("designation")
+    .innerText =
+      data.designation ||
+      "Member";
+
+  if(data.profile_photo_url){
+
+    document
+      .getElementById("profilePhoto")
+      .src =
+      data.profile_photo_url;
+
+  }else{
+
+    document
+      .getElementById("profilePhoto")
+      .src =
+      "https://ui-avatars.com/api/?name=" +
+      encodeURIComponent(data.name || "Member");
+
+  }
+}
+
+
+/* =====================================================
+   PROFILE PHOTO UPLOAD
+===================================================== */
+
+async function uploadProfilePhoto(){
+
+  if(!currentUser){
+
+    alert("ପ୍ରଥମେ Login କରନ୍ତୁ।");
+    return;
+  }
+
+  const file =
+    document.getElementById("photoFile").files[0];
+
+  if(!file){
+
+    alert("ପ୍ରଥମେ Photo select କରନ୍ତୁ।");
+    return;
+  }
+
+  if(!file.type.startsWith("image/")){
+
+    alert("କେବଳ image file upload କରନ୍ତୁ।");
+    return;
+  }
+
+  if(file.size > 5 * 1024 * 1024){
+
+    alert("Photo 5 MB ଠାରୁ କମ୍ ହେବା ଦରକାର।");
+    return;
+  }
+
+  const extension =
+    file.name.split(".").pop();
+
+  const filePath =
+    currentUser.id +
+    "/profile." +
+    extension;
+
+  document
+    .getElementById("uploadStatus")
+    .innerText =
+      "Photo upload ହେଉଛି...";
+
+
+  /* Upload to profile-photos bucket */
+
+  const { error:uploadError } =
+    await supabaseClient
+      .storage
+      .from("profile-photos")
+      .upload(
+        filePath,
+        file,
+        {
+          upsert:true,
+          contentType:file.type
+        }
+      );
+
+  if(uploadError){
+
+    document
+      .getElementById("uploadStatus")
+      .innerText =
+        uploadError.message;
+
+    alert(
+      "Photo Upload Error: " +
+      uploadError.message
+    );
+
+    return;
+  }
+
+
+  /* Get public URL */
+
+  const {
+    data:urlData
+  } =
+    supabaseClient
+      .storage
+      .from("profile-photos")
+      .getPublicUrl(filePath);
+
+  const photoURL =
+    urlData.publicUrl;
+
+
+  /* Update members table */
+
+  const { error:updateError } =
+    await supabaseClient
+      .from("members")
+      .update({
+        profile_photo_url:photoURL,
+        updated_at:new Date().toISOString()
+      })
+      .eq("user_id",currentUser.id);
+
+  if(updateError){
+
+    alert(
+      "Database update error: " +
+      updateError.message
+    );
+
+    return;
+  }
+
+  document
+    .getElementById("profilePhoto")
+    .src =
+      photoURL;
+
+  document
+    .getElementById("uploadStatus")
+    .innerText =
+      "✅ Profile photo successfully updated!";
+
+  alert("Profile Photo Upload Successful!");
+}
+
+
+/* =====================================================
+   LOAD MEMBERS
+===================================================== */
+
+async function loadMembers(){
+
+  const search =
+    document
+      .getElementById("memberSearch")
+      .value
+      .trim();
+
+  let query =
+    supabaseClient
+      .from("members")
+      .select(
+        "member_id,name,email,designation,profile_photo_url,fee"
+      )
+      .order("member_id");
+
+  if(search){
+
+    query =
+      query.ilike(
+        "member_id",
+        "%" + search + "%"
+      );
+
+  }
+
+  const {
+    data,
+    error
+  } =
+    await query;
+
+  const list =
+    document.getElementById("memberList");
+
+  if(error){
+
+    list.innerHTML =
+      "<p>Members load ହୋଇପାରିଲା ନାହିଁ।</p>";
+
+    console.log(error);
+
+    return;
+  }
+
+  if(!data || data.length === 0){
+
+    list.innerHTML =
+      "<p>କୌଣସି Member ମିଳିଲା ନାହିଁ।</p>";
+
+    return;
+  }
+
+  list.innerHTML =
+    data.map(member => {
+
+      const photo =
+        member.profile_photo_url ||
+        "https://ui-avatars.com/api/?name=" +
+        encodeURIComponent(
+          member.name || "Member"
+        );
+
+      return `
+
+        <div class="member-row">
+
+          <img
+            src="${photo}"
+            style="
+              width:55px;
+              height:55px;
+              border-radius:50%;
+              object-fit:cover;
+              float:left;
+              margin-right:12px;
+            "
+          >
+
+          <strong>
+            ${member.member_id || ""}
+          </strong>
+
+          <br>
+
+          ${member.name || "Member"}
+
+          <br>
+
+          <span class="small">
+            ${member.designation || "Member"}
+          </span>
+
+          <div style="clear:both"></div>
+
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+
+/* =====================================================
+   AUTH STATE LISTENER
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event,session) => {
+
+    if(session && session.user){
+
+      currentUser =
+        session.user;
+
+      setTimeout(
+        () => loadUserProfile(),
+        100
+      );
+
+    }else{
+
+      currentUser = null;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkLogin();
+
+loadMembers();
+
 </script>
-</body></html>
+
+</body>
+</html>
