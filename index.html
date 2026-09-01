@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Maa Basuli Uda Jatra Committee</title>
+<title>ମା' ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -23,13 +23,13 @@ body{
 header{
   background:linear-gradient(135deg,#650000,#e21b23);
   color:white;
-  padding:22px 16px;
+  padding:24px 15px;
   text-align:center;
 }
 
 header h1{
   margin:0;
-  font-size:26px;
+  font-size:25px;
 }
 
 header p{
@@ -62,7 +62,7 @@ nav a{
 
 .card{
   background:white;
-  padding:22px;
+  padding:20px;
   border-radius:14px;
   box-shadow:0 2px 10px #ddd;
   margin-bottom:20px;
@@ -94,10 +94,6 @@ button{
 
 button.google{
   background:#333;
-}
-
-button.secondary{
-  background:#555;
 }
 
 button.logout{
@@ -139,6 +135,16 @@ button.logout{
   border-radius:10px;
   padding:12px;
   margin:8px 0;
+  min-height:80px;
+}
+
+.member-row img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  object-fit:cover;
+  float:left;
+  margin-right:12px;
 }
 
 .small{
@@ -172,34 +178,33 @@ footer{
 
 <div class="container">
 
-<!-- HOME -->
-
 <section id="home" class="card">
-  <h2>🙏 ମା' ବାସୁଳୀଙ୍କ ଆଶୀର୍ବାଦ</h2>
-  <p>
-    ମା' ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି,
-    ଠାକୁରମୁଣ୍ଡାର ଅଧିକୃତ ଅନଲାଇନ୍ ପୋର୍ଟାଲ୍।
-  </p>
 
-  <p>
-    ଏଠାରେ କମିଟି ସଦସ୍ୟମାନେ Registration କରି
-    ନିଜର Member ID ଓ Profile ଦେଖିପାରିବେ।
-  </p>
+<h2>🙏 ମା' ବାସୁଳୀଙ୍କ ଆଶୀର୍ବାଦ</h2>
+
+<p>
+ମା' ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି,
+ଠାକୁରମୁଣ୍ଡାର ଅଧିକୃତ ଅନଲାଇନ୍ ପୋର୍ଟାଲ୍।
+</p>
+
+<p>
+ଏଠାରେ କମିଟି ସଦସ୍ୟମାନେ Registration କରି
+ନିଜର Member ID ଓ Profile ଦେଖିପାରିବେ।
+</p>
+
 </section>
 
-
-<!-- LOGIN / SIGNUP -->
 
 <section id="login" class="card">
 
 <h2>🔐 Member Login / Signup</h2>
 
 <div id="authStatus" class="status">
-  ଦୟାକରି Login କିମ୍ବା Signup କରନ୍ତୁ।
+ଦୟାକରି Login କିମ୍ବା Signup କରନ୍ତୁ।
 </div>
 
 <button class="google" onclick="signInWithGoogle()">
-  🔵 Continue with Google
+🔵 Continue with Google
 </button>
 
 <hr>
@@ -207,25 +212,22 @@ footer{
 <h3>📧 Email Signup</h3>
 
 <input
-  type="text"
-  id="signupName"
-  placeholder="ଆପଣଙ୍କ ନାମ"
->
+type="text"
+id="signupName"
+placeholder="ଆପଣଙ୍କ ନାମ">
 
 <input
-  type="email"
-  id="signupEmail"
-  placeholder="Email"
->
+type="email"
+id="signupEmail"
+placeholder="Email">
 
 <input
-  type="password"
-  id="signupPassword"
-  placeholder="Password"
->
+type="password"
+id="signupPassword"
+placeholder="Password">
 
 <button onclick="signUpWithEmail()">
-  Signup
+Signup
 </button>
 
 <hr>
@@ -233,29 +235,28 @@ footer{
 <h3>🔑 Email Login</h3>
 
 <input
-  type="email"
-  id="loginEmail"
-  placeholder="Email"
->
+type="email"
+id="loginEmail"
+placeholder="Email">
 
 <input
-  type="password"
-  id="loginPassword"
-  placeholder="Password"
->
+type="password"
+id="loginPassword"
+placeholder="Password">
 
 <button onclick="signInWithEmail()">
-  Login
+Login
 </button>
 
-<button class="logout hidden" id="logoutBtn" onclick="logout()">
-  Logout
+<button
+class="logout hidden"
+id="logoutBtn"
+onclick="logout()">
+Logout
 </button>
 
 </section>
 
-
-<!-- PROFILE -->
 
 <section id="profile" class="card hidden">
 
@@ -263,16 +264,17 @@ footer{
 
 <div class="profile">
 
-<img id="profilePhoto"
-     src=""
-     alt="Profile Photo">
+<img
+id="profilePhoto"
+src="https://ui-avatars.com/api/?name=Member"
+alt="Profile Photo">
 
 <h3 id="profileName">-</h3>
 
 <p id="profileEmail">-</p>
 
 <div class="member-id" id="memberId">
-  MB---
+MB---
 </div>
 
 <p id="designation">Member</p>
@@ -282,17 +284,16 @@ footer{
 <h3>📷 Profile Photo Upload</h3>
 
 <input
-  type="file"
-  id="photoFile"
-  accept="image/*"
->
+type="file"
+id="photoFile"
+accept="image/*">
 
 <button onclick="uploadProfilePhoto()">
-  Upload Photo
+Upload Photo
 </button>
 
 <div id="uploadStatus" class="status">
-  Photo select କରି Upload କରନ୍ତୁ।
+Photo select କରି Upload କରନ୍ତୁ।
 </div>
 
 </div>
@@ -300,21 +301,18 @@ footer{
 </section>
 
 
-<!-- MEMBERS -->
-
 <section id="members" class="card">
 
 <h2>👥 Committee Members</h2>
 
 <input
-  type="text"
-  id="memberSearch"
-  placeholder="Member ID ଦ୍ୱାରା Search..."
-  oninput="loadMembers()"
->
+type="text"
+id="memberSearch"
+placeholder="Member ID ଦ୍ୱାରା Search..."
+oninput="loadMembers()">
 
 <div id="memberList">
-  Loading...
+Loading...
 </div>
 
 </section>
@@ -323,15 +321,15 @@ footer{
 
 
 <footer>
-  © Maa Basuli Uda Jatra Committee, Thakurmunda
+© Maa Basuli Uda Jatra Committee, Thakurmunda
 </footer>
 
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIGURATION
-===================================================== */
+/* ==============================
+   SUPABASE CONFIG
+============================== */
 
 const SUPABASE_URL =
 "https://nogwmbocptlbgzzpdjny.supabase.co";
@@ -345,26 +343,22 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
 let currentUser = null;
 
 
-/* =====================================================
+/* ==============================
    GOOGLE LOGIN
-===================================================== */
+============================== */
 
 async function signInWithGoogle(){
 
-  const { data, error } =
+  const { error } =
     await supabaseClient.auth.signInWithOAuth({
       provider:"google",
       options:{
-        redirectTo:window.location.origin +
-                   window.location.pathname
+        redirectTo:
+          window.location.origin +
+          window.location.pathname
       }
     });
 
@@ -374,20 +368,23 @@ async function signInWithGoogle(){
 }
 
 
-/* =====================================================
+/* ==============================
    EMAIL SIGNUP
-===================================================== */
+============================== */
 
 async function signUpWithEmail(){
 
   const name =
-    document.getElementById("signupName").value.trim();
+    document.getElementById("signupName")
+    .value.trim();
 
   const email =
-    document.getElementById("signupEmail").value.trim();
+    document.getElementById("signupEmail")
+    .value.trim();
 
   const password =
-    document.getElementById("signupPassword").value;
+    document.getElementById("signupPassword")
+    .value;
 
   if(!name || !email || !password){
     alert("Name, Email ଓ Password ଦିଅନ୍ତୁ।");
@@ -415,7 +412,6 @@ async function signUpWithEmail(){
           window.location.origin +
           window.location.pathname
       }
-
     });
 
   if(error){
@@ -423,23 +419,29 @@ async function signUpWithEmail(){
     return;
   }
 
-  alert(
-    "Signup successful! Email verification ଦରକାର ହୋଇପାରେ।"
-  );
+  if(data.user){
+
+    alert(
+      "Registration successful! " +
+      "Email verification କରନ୍ତୁ।"
+    );
+  }
 }
 
 
-/* =====================================================
+/* ==============================
    EMAIL LOGIN
-===================================================== */
+============================== */
 
 async function signInWithEmail(){
 
   const email =
-    document.getElementById("loginEmail").value.trim();
+    document.getElementById("loginEmail")
+    .value.trim();
 
   const password =
-    document.getElementById("loginPassword").value;
+    document.getElementById("loginPassword")
+    .value;
 
   if(!email || !password){
     alert("Email ଓ Password ଦିଅନ୍ତୁ।");
@@ -457,19 +459,27 @@ async function signInWithEmail(){
     return;
   }
 
-  alert("Login successful!");
+  currentUser = data.user;
 
   await loadUserProfile();
+
+  alert("Login successful!");
 }
 
 
-/* =====================================================
+/* ==============================
    LOGOUT
-===================================================== */
+============================== */
 
 async function logout(){
 
-  await supabaseClient.auth.signOut();
+  const { error } =
+    await supabaseClient.auth.signOut();
+
+  if(error){
+    alert(error.message);
+    return;
+  }
 
   currentUser = null;
 
@@ -485,14 +495,12 @@ async function logout(){
     .getElementById("authStatus")
     .innerText =
       "ଆପଣ Logout କରିଛନ୍ତି।";
-
-  alert("Logout successful");
 }
 
 
-/* =====================================================
-   LOAD CURRENT USER
-===================================================== */
+/* ==============================
+   CHECK LOGIN
+============================== */
 
 async function checkLogin(){
 
@@ -509,17 +517,13 @@ async function checkLogin(){
 
     await loadUserProfile();
 
-  }else{
-
-    currentUser = null;
-
   }
 }
 
 
-/* =====================================================
+/* ==============================
    LOAD USER PROFILE
-===================================================== */
+============================== */
 
 async function loadUserProfile(){
 
@@ -537,15 +541,14 @@ async function loadUserProfile(){
     currentUser = session.user;
   }
 
-  const user =
-    currentUser;
+  const user = currentUser;
 
   const { data, error } =
     await supabaseClient
       .from("members")
       .select("*")
       .eq("user_id",user.id)
-      .single();
+      .maybeSingle();
 
   if(error){
 
@@ -555,6 +558,16 @@ async function loadUserProfile(){
       .getElementById("authStatus")
       .innerText =
         "Login ହୋଇଛି, କିନ୍ତୁ Member profile ମିଳିଲା ନାହିଁ।";
+
+    return;
+  }
+
+  if(!data){
+
+    document
+      .getElementById("authStatus")
+      .innerText =
+        "Login ହୋଇଛି। Member profile ଏପର୍ଯ୍ୟନ୍ତ ତିଆରି ହୋଇନାହିଁ।";
 
     return;
   }
@@ -603,49 +616,39 @@ async function loadUserProfile(){
     document
       .getElementById("profilePhoto")
       .src =
-      data.profile_photo_url;
-
-  }else{
-
-    document
-      .getElementById("profilePhoto")
-      .src =
-      "https://ui-avatars.com/api/?name=" +
-      encodeURIComponent(data.name || "Member");
+        data.profile_photo_url;
 
   }
 }
 
 
-/* =====================================================
-   PROFILE PHOTO UPLOAD
-===================================================== */
+/* ==============================
+   PHOTO UPLOAD
+============================== */
 
 async function uploadProfilePhoto(){
 
   if(!currentUser){
-
     alert("ପ୍ରଥମେ Login କରନ୍ତୁ।");
     return;
   }
 
   const file =
-    document.getElementById("photoFile").files[0];
+    document
+      .getElementById("photoFile")
+      .files[0];
 
   if(!file){
-
     alert("ପ୍ରଥମେ Photo select କରନ୍ତୁ।");
     return;
   }
 
   if(!file.type.startsWith("image/")){
-
     alert("କେବଳ image file upload କରନ୍ତୁ।");
     return;
   }
 
   if(file.size > 5 * 1024 * 1024){
-
     alert("Photo 5 MB ଠାରୁ କମ୍ ହେବା ଦରକାର।");
     return;
   }
@@ -663,9 +666,6 @@ async function uploadProfilePhoto(){
     .innerText =
       "Photo upload ହେଉଛି...";
 
-
-  /* Upload to profile-photos bucket */
-
   const { error:uploadError } =
     await supabaseClient
       .storage
@@ -681,21 +681,18 @@ async function uploadProfilePhoto(){
 
   if(uploadError){
 
-    document
-      .getElementById("uploadStatus")
-      .innerText =
-        uploadError.message;
-
     alert(
       "Photo Upload Error: " +
       uploadError.message
     );
 
+    document
+      .getElementById("uploadStatus")
+      .innerText =
+        uploadError.message;
+
     return;
   }
-
-
-  /* Get public URL */
 
   const {
     data:urlData
@@ -708,9 +705,6 @@ async function uploadProfilePhoto(){
   const photoURL =
     urlData.publicUrl;
 
-
-  /* Update members table */
-
   const { error:updateError } =
     await supabaseClient
       .from("members")
@@ -718,7 +712,10 @@ async function uploadProfilePhoto(){
         profile_photo_url:photoURL,
         updated_at:new Date().toISOString()
       })
-      .eq("user_id",currentUser.id);
+      .eq(
+        "user_id",
+        currentUser.id
+      );
 
   if(updateError){
 
@@ -739,14 +736,12 @@ async function uploadProfilePhoto(){
     .getElementById("uploadStatus")
     .innerText =
       "✅ Profile photo successfully updated!";
-
-  alert("Profile Photo Upload Successful!");
 }
 
 
-/* =====================================================
+/* ==============================
    LOAD MEMBERS
-===================================================== */
+============================== */
 
 async function loadMembers(){
 
@@ -771,7 +766,6 @@ async function loadMembers(){
         "member_id",
         "%" + search + "%"
       );
-
   }
 
   const {
@@ -785,10 +779,10 @@ async function loadMembers(){
 
   if(error){
 
+    console.log(error);
+
     list.innerHTML =
       "<p>Members load ହୋଇପାରିଲା ନାହିଁ।</p>";
-
-    console.log(error);
 
     return;
   }
@@ -815,17 +809,7 @@ async function loadMembers(){
 
         <div class="member-row">
 
-          <img
-            src="${photo}"
-            style="
-              width:55px;
-              height:55px;
-              border-radius:50%;
-              object-fit:cover;
-              float:left;
-              margin-right:12px;
-            "
-          >
+          <img src="${photo}">
 
           <strong>
             ${member.member_id || ""}
@@ -851,9 +835,9 @@ async function loadMembers(){
 }
 
 
-/* =====================================================
-   AUTH STATE LISTENER
-===================================================== */
+/* ==============================
+   AUTH LISTENER
+============================== */
 
 supabaseClient.auth.onAuthStateChange(
   async (event,session) => {
@@ -873,14 +857,13 @@ supabaseClient.auth.onAuthStateChange(
       currentUser = null;
 
     }
-
   }
 );
 
 
-/* =====================================================
+/* ==============================
    START
-===================================================== */
+============================== */
 
 checkLogin();
 
