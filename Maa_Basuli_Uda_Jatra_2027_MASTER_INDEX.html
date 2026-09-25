@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<style>
+:root{--red:#9f0000;--red2:#df1f26;--gold:#f3b53f;--dark:#2b0b0b;--green:#08752a;--gray:#666;--bg:#fff8f6}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Oriya","Noto Sans",Arial,sans-serif;background:var(--bg);color:#271515}
+header{background:linear-gradient(135deg,#610000,#b40000,#e21b23);color:#fff;padding:18px 14px;box-shadow:0 3px 15px #0003}
+.wrap{max-width:1150px;margin:auto}.head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.brand h1{margin:0;font-size:clamp(22px,5vw,38px)}.brand p{margin:4px 0}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}nav a,button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700}nav a{color:#fff;text-decoration:none;border:1px solid #ffffff55}
+main{min-height:70vh}.section{max-width:1150px;margin:auto;padding:24px 14px}.title{text-align:center;color:var(--red);font-size:30px;margin:8px 0 18px}
+.card{background:#fff;border-radius:16px;padding:20px;margin:15px 0;box-shadow:0 3px 18px #00000012;border:1px solid #eee}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{font-weight:700;display:block;margin:7px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:9px;font-size:15px}textarea{min-height:90px}
+.btn{background:var(--red2);color:#fff}.btn2{background:#333;color:#fff}.green{background:var(--green);color:#fff}.gold{background:#c88a00;color:#fff}.danger{background:#b00000;color:#fff}
+.msg{padding:11px 13px;border-left:5px solid var(--red);background:#fff0ef;border-radius:8px;margin-top:12px}.ok{border-left-color:var(--green);background:#effff3}
+.hidden{display:none!important}.noticebar{background:#ffd65a;color:#351700;overflow:hidden;white-space:nowrap;padding:9px 0;font-weight:800}.ticker{display:inline-block;padding-left:100%;animation:ticker 22s linear infinite}@keyframes ticker{to{transform:translateX(-100%)}}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:9px;border-bottom:1px solid #eee;text-align:left}th{background:#faf0ed}.pill{display:inline-block;padding:4px 9px;border-radius:20px;font-size:12px;font-weight:800}.active{background:#d9f8e2;color:#08752a}.inactive{background:#ffe0e0;color:#a00000}
+.photo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #eee}.idcard{max-width:420px;margin:auto;border:2px solid var(--gold);border-radius:16px;padding:18px;background:linear-gradient(#fff,#fff9e9);text-align:center}.qr{margin:12px auto;display:block}
+footer{background:#250909;color:#fff;padding:25px 14px;text-align:center;margin-top:30px}.small{font-size:13px;color:#666}
+@media(max-width:600px){.section{padding:18px 10px}.card{padding:15px}table{font-size:13px}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap head">
+<div class="brand"><h1>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</h1><p>ଠାକୁରମୁଣ୍ଡା, ମୟୂରଭଞ୍ଜ, ଓଡ଼ିଶା</p></div>
+<div>📞 8917437067</div>
+</div>
+<nav class="wrap">
+<a href="#home">Home</a><a href="#members">Members</a><a href="#account">Member Login</a><a href="#verify">QR Verification</a><a href="#admin">Admin</a>
+</nav>
+</header>
+
+<div id="noticeBar" class="noticebar hidden"><span id="ticker" class="ticker"></span></div>
+
+<main>
+<section id="home" class="section">
+<h2 class="title">🌺 ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା ୨୦୨୭ 🌺</h2>
+<div class="card"><h3>ଜୟ ମା ବାସୁଳୀ 🙏</h3><p>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି, ଠାକୁରମୁଣ୍ଡାର ଅଧିକୃତ ସଦସ୍ୟ ପୋର୍ଟାଲ୍।</p><p><b>ମୁଖ୍ୟ ଉଡା ଯାତ୍ରା:</b> ୧୪ ଏପ୍ରିଲ ୨୦୨୭</p></div>
+</section>
+
+<section id="account" class="section">
+<h2 class="title">👤 Member Signup / Login</h2>
+<div class="card">
+<div class="grid">
+<div><label>ନାମ *</label><input id="suName" placeholder="ଆପଣଙ୍କ ନାମ"></div>
+<div><label>Email *</label><input id="suEmail" type="email" placeholder="example@gmail.com"></div>
+<div><label>Mobile Number *</label><input id="suMobile" inputmode="numeric" maxlength="10" placeholder="10 digit mobile"></div>
+<div><label>Password *</label><input id="suPassword" type="password" placeholder="Minimum password length set in Supabase"></div>
+</div>
+<p class="small">📌 Mobile OTP ନାହିଁ। Signup ପାଇଁ Email + Mobile Number + Password ବ୍ୟବହାର ହେବ।</p>
+<button class="green" onclick="signup()">📝 Create Account</button>
+<button class="btn2" onclick="login()">🔐 Login</button>
+<div id="authMsg"></div>
+</div>
+
+<div id="profileCard" class="card hidden">
+<h3>My Member Profile</h3>
+<div id="profileView"></div>
+<div class="grid">
+<div><label>ନାମ</label><input id="pName"></div>
+<div><label>Mobile</label><input id="pPhone" readonly></div>
+<div><label>Address</label><input id="pAddress"></div>
+<div><label>Blood Group</label><select id="pBlood"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+<div><label>Profile Photo</label><input id="pPhoto" type="file" accept="image/*"></div>
+</div>
+<button class="btn" onclick="saveProfile()">💾 Save Profile</button>
+<button class="gold" onclick="downloadID()">🪪 Digital ID / Print</button>
+<button class="btn2" onclick="logout()">Logout</button>
+<div id="profileMsg"></div>
+</div>
+</section>
+
+<section id="members" class="section">
+<h2 class="title">👥 Member List</h2>
+<div class="card"><div id="memberTable">Loading...</div></div>
+</section>
+
+<section id="verify" class="section">
+<h2 class="title">🔎 QR Verification</h2>
+<div class="card">
+<label>Member ID</label><input id="verifyId" placeholder="MB001">
+<button class="btn" onclick="verifyMember()">Verify</button>
+<div id="verifyResult"></div>
+</div>
+</section>
+
+<section id="admin" class="section">
+<h2 class="title">🔐 Admin Panel</h2>
+<div class="card" id="adminLoginCard">
+<div class="grid"><div><label>Email</label><input id="adEmail" type="email" placeholder="Admin email"></div><div><label>Password</label><input id="adPassword" type="password"></div></div>
+<button class="btn" onclick="adminLogin()">Admin Login</button>
+<div id="adminMsg"></div>
+</div>
+<div id="adminPanel" class="hidden">
+<div class="card"><h3>Admin Status</h3><div id="adminInfo"></div><button class="btn2" onclick="logout()">Logout</button></div>
+<div class="card" id="memberManageCard"><h3>Members</h3><div id="adminMembers"></div></div>
+<div class="card" id="superCard">
+<h3>👑 Super Admin Controls</h3>
+<p class="small">Only Super Admin can change/delete Member IDs and manage Admins.</p>
+<div class="grid">
+<div><label>Member ID</label><input id="editMemberId" placeholder="MB001"></div>
+<div><label>New Member ID</label><input id="newMemberId" placeholder="MB002"></div>
+</div>
+<button class="gold" onclick="changeMemberId()">Change Member ID</button>
+<button class="danger" onclick="deleteMember()">Delete Member Record</button>
+<hr>
+<h4>Promote existing member to Admin</h4>
+<div class="grid">
+<div><label>Member Email</label><input id="promoteEmail" type="email"></div>
+<div><label>Member permission</label><select id="permMember"><option value="false">No</option><option value="true">Yes</option></select></div>
+<div><label>Notice permission</label><select id="permNotice"><option value="false">No</option><option value="true">Yes</option></select></div>
+</div>
+<button class="green" onclick="promoteAdmin()">Save Admin</button>
+<div id="superMsg"></div>
+</div>
+<div class="card" id="noticeManageCard">
+<h3>📢 Notice Management</h3>
+<div class="grid"><div><label>Title</label><input id="nTitle"></div><div><label>Message</label><textarea id="nMessage"></textarea></div><div><label>Active</label><select id="nActive"><option value="true">Active</option><option value="false">Deactive</option></select></div></div>
+<button class="green" onclick="addNotice()">Add Notice</button>
+<div id="noticeList"></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>© 2027 Maa Basuli Uda Jatra Committee, Thakurmunda</footer>
+
+<script>
+const SUPABASE_URL="https://nogwmbocptlbgzzpdjny.supabase.co";
+const SUPABASE_KEY="sb_publishable_bpa45-FlPLMmt4kBpbveJA_c95Noodr";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const SUPER_EMAIL="maabasuliudajatracommittee@gmail.com";
+let currentUser=null,currentAdmin=null,currentProfile=null;
+
+const $=id=>document.getElementById(id);
+function msg(id,text,ok=false){$(id).innerHTML='<div class="msg '+(ok?'ok':'')+'">'+text+'</div>'}
+function mobileOK(v){return /^[6-9]\d{9}$/.test(v)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+async function signup(){
+ const name=$('suName').value.trim(),email=$('suEmail').value.trim().toLowerCase(),mobile=$('suMobile').value.trim(),pass=$('suPassword').value;
+ if(!name||!email||!mobile||!pass)return msg('authMsg','ସମସ୍ତ * field ପୂରଣ କରନ୍ତୁ।');
+ if(!mobileOK(mobile))return msg('authMsg','ସଠିକ୍ 10 digit Indian mobile number ଦିଅନ୍ତୁ।');
+ const {data,error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:name,mobile:mobile},emailRedirectTo:location.origin+location.pathname+'#account'}});
+ if(error)return msg('authMsg',esc(error.message));
+ if(!data.user)return msg('authMsg','Account create ହୋଇନାହିଁ।');
+ msg('authMsg',data.session?'✅ Account created. ଆପଣ Login ହୋଇଛନ୍ତି।':'✅ Account created. Email confirmation ଦରକାର ହୋଇପାରେ। Email check କରନ୍ତୁ।',true);
+ if(data.session) await loadMe();
+}
+
+async function login(){
+ const email=$('suEmail').value.trim().toLowerCase(),pass=$('suPassword').value;
+ if(!email||!pass)return msg('authMsg','Email ଓ Password ଦିଅନ୍ତୁ।');
+ const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+ if(error)return msg('authMsg',esc(error.message));
+ currentUser=data.user; await loadMe(); msg('authMsg','✅ Login successful.',true);
+ location.hash='account';
+}
+
+async function adminLogin(){
+ const email=$('adEmail').value.trim().toLowerCase(),pass=$('adPassword').value;
+ if(!email||!pass)return msg('adminMsg','Email ଓ Password ଦିଅନ୍ତୁ।');
+ const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+ if(error)return msg('adminMsg',esc(error.message));
+ currentUser=data.user;
+ const {data:admin,error:ae}=await sb.from('admin_users').select('*').eq('user_id',currentUser.id).maybeSingle();
+ if(ae||!admin){await sb.auth.signOut();currentUser=null;return msg('adminMsg','ଏହି account ରେ Admin permission ନାହିଁ।');}
+ currentAdmin=admin; $('adminLoginCard').classList.add('hidden'); $('adminPanel').classList.remove('hidden'); renderAdmin(); msg('adminMsg','',true);
+}
+
+async function loadMe(){
+ const {data:{user}}=await sb.auth.getUser(); currentUser=user||null;
+ if(!currentUser)return;
+ const {data,error}=await sb.from('members').select('*').eq('user_id',currentUser.id).maybeSingle();
+ if(error){console.error(error);return}
+ currentProfile=data;
+ if(data){fillProfile(data); $('profileCard').classList.remove('hidden');}
+}
+function fillProfile(p){
+ $('pName').value=p.name||'';$('pPhone').value=p.phone||'';$('pAddress').value=p.address||'';$('pBlood').value=p.blood_group||'';
+ $('profileView').innerHTML=`<div style="text-align:center"><img class="photo" src="${esc(p.profile_photo_url||'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><rect width=%22120%22 height=%22120%22 fill=%22%23eee%22/><text x=%2260%22 y=%2268%22 text-anchor=%22middle%22>Photo</text></svg>')}" onerror="this.style.display='none'"><h3>${esc(p.name)}</h3><p><b>Member ID:</b> ${esc(p.member_id)}</p><p><b>Designation:</b> ${esc(p.designation||'Pending')}</p><span class="pill ${p.is_active?'active':'inactive'}">${p.is_active?'ACTIVE':'DEACTIVE'}</span><canvas id="myQR" class="qr"></canvas></div>`;
+ new QRious({element:$('myQR'),size:170,value:location.origin+location.pathname+'#verify='+encodeURIComponent(p.member_id)});
+}
+async function saveProfile(){
+ if(!currentUser||!currentProfile)return;
+ let photoUrl=currentProfile.profile_photo_url||null;
+ const f=$('pPhoto').files[0];
+ if(f){
+  const ext=(f.name.split('.').pop()||'jpg').toLowerCase(),path=currentUser.id+'-'+Date.now()+'.'+ext;
+  const {error:up}=await sb.storage.from('profile-photos').upload(path,f,{upsert:true});
+  if(up)return msg('profileMsg',esc(up.message));
+  photoUrl=sb.storage.from('profile-photos').getPublicUrl(path).data.publicUrl;
+ }
+ const {data,error}=await sb.from('members').update({name:$('pName').value.trim(),address:$('pAddress').value.trim(),blood_group:$('pBlood').value||null,profile_photo_url:photoUrl,profile_complete:true}).eq('user_id',currentUser.id).select().single();
+ if(error)return msg('profileMsg',esc(error.message));
+ currentProfile=data;fillProfile(data);msg('profileMsg','✅ Profile saved.',true);
+}
+async function logout(){await sb.auth.signOut();currentUser=null;currentAdmin=null;currentProfile=null;location.hash='account';location.reload()}
+async function verifyMember(){
+ const id=$('verifyId').value.trim().toUpperCase();if(!id)return msg('verifyResult','Member ID ଦିଅନ୍ତୁ।');
+ const {data,error}=await sb.from('members').select('member_id,name,phone,designation,blood_group,profile_photo_url,is_active').eq('member_id',id).maybeSingle();
+ if(error)return msg('verifyResult',esc(error.message));if(!data)return msg('verifyResult','❌ Member ID ମିଳିଲା ନାହିଁ।');
+ $('verifyResult').innerHTML=`<div class="card"><div style="text-align:center"><img class="photo" src="${esc(data.profile_photo_url||'')}" onerror="this.style.display='none'"><h3>${esc(data.name)}</h3><p><b>Member ID:</b> ${esc(data.member_id)}</p><p><b>Mobile:</b> ${esc(data.phone)}</p><p><b>Designation:</b> ${esc(data.designation||'Pending')}</p><p><b>Blood Group:</b> ${esc(data.blood_group||'—')}</p><span class="pill ${data.is_active?'active':'inactive'}">${data.is_active?'ACTIVE':'DEACTIVE'}</span><canvas id="vQR" class="qr"></canvas></div></div>`;
+ new QRious({element:$('vQR'),size:170,value:location.origin+location.pathname+'#verify='+encodeURIComponent(data.member_id)});
+}
+async function loadMembers(){
+ const {data,error}=await sb.from('members').select('member_id,name,designation,blood_group,is_active,profile_photo_url').order('created_at',{ascending:true});
+ if(error){$('memberTable').innerHTML=esc(error.message);return}
+ if(!data.length){$('memberTable').innerHTML='<p>ଏବେ କୌଣସି Member ନାହାନ୍ତି।</p>';return}
+ $('memberTable').innerHTML='<div style="overflow:auto"><table><tr><th>Photo</th><th>Member ID</th><th>Name</th><th>Designation</th><th>Blood</th><th>Status</th></tr>'+data.map(p=>`<tr><td>${p.profile_photo_url?`<img src="${esc(p.profile_photo_url)}" style="width:45px;height:45px;border-radius:50%;object-fit:cover">`:''}</td><td>${esc(p.member_id)}</td><td>${esc(p.name)}</td><td>${esc(p.designation||'Pending')}</td><td>${esc(p.blood_group||'—')}</td><td><span class="pill ${p.is_active?'active':'inactive'}">${p.is_active?'ACTIVE':'DEACTIVE'}</span></td></tr>`).join('')+'</table></div>';
+}
+async function renderAdmin(){
+ $('adminInfo').innerHTML=`Logged in as <b>${esc(currentAdmin.email)}</b> — <b>${esc(currentAdmin.role)}</b>`;
+ if(currentAdmin.role==='super_admin'){$('superCard').classList.remove('hidden')}else{$('superCard').classList.add('hidden')}
+ if(!currentAdmin.can_manage_members&&currentAdmin.role!=='super_admin'){$('memberManageCard').classList.add('hidden')}else{$('memberManageCard').classList.remove('hidden');await loadAdminMembers()}
+ if(!currentAdmin.can_manage_notices&&currentAdmin.role!=='super_admin'){$('noticeManageCard').classList.add('hidden')}else{$('noticeManageCard').classList.remove('hidden');await loadNoticesAdmin()}
+}
+async function loadAdminMembers(){
+ const {data,error}=await sb.from('members').select('member_id,name,email,phone,designation,is_active,blood_group').order('created_at',{ascending:true});
+ if(error){$('adminMembers').innerHTML=esc(error.message);return}
+ $('adminMembers').innerHTML='<div style="overflow:auto"><table><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Designation</th><th>Status</th></tr>'+data.map(p=>`<tr><td>${esc(p.member_id)}</td><td>${esc(p.name)}</td><td>${esc(p.phone)}</td><td>${esc(p.designation||'Pending')}</td><td>${p.is_active?'ACTIVE':'DEACTIVE'}</td></tr>`).join('')+'</table></div>';
+}
+async function changeMemberId(){
+ if(currentAdmin?.role!=='super_admin')return msg('superMsg','Only Super Admin.');
+ const oldId=$('editMemberId').value.trim().toUpperCase(),newId=$('newMemberId').value.trim().toUpperCase();
+ if(!/^MB\d+$/.test(oldId)||!/^MB\d+$/.test(newId))return msg('superMsg','MB001 format ବ୍ୟବହାର କରନ୍ତୁ।');
+ const {error}=await sb.from('members').update({member_id:newId}).eq('member_id',oldId);
+ if(error)return msg('superMsg',esc(error.message));msg('superMsg','✅ Member ID changed.',true);loadMembers();loadAdminMembers();
+}
+async function deleteMember(){
+ if(currentAdmin?.role!=='super_admin')return msg('superMsg','Only Super Admin.');
+ const id=$('editMemberId').value.trim().toUpperCase();if(!id)return msg('superMsg','Member ID ଦିଅନ୍ତୁ।');
+ if(!confirm(id+' delete କରିବେ?'))return;
+ const {error}=await sb.from('members').delete().eq('member_id',id);
+ if(error)return msg('superMsg',esc(error.message));msg('superMsg','✅ Member record deleted.',true);loadMembers();loadAdminMembers();
+}
+async function promoteAdmin(){
+ if(currentAdmin?.role!=='super_admin')return;
+ const email=$('promoteEmail').value.trim().toLowerCase();
+ if(!email)return msg('superMsg','Member email ଦିଅନ୍ତୁ।');
+ const {data:m,error:me}=await sb.from('members').select('user_id,email').eq('email',email).maybeSingle();
+ if(me||!m)return msg('superMsg','ଏହି email ର Member ମିଳିଲା ନାହିଁ।');
+ const {error}=await sb.from('admin_users').upsert({user_id:m.user_id,email,role:'admin',can_manage_members:$('permMember').value==='true',can_manage_notices:$('permNotice').value==='true',can_manage_admins:false});
+ if(error)return msg('superMsg',esc(error.message));msg('superMsg','✅ Admin permission saved.',true);
+}
+async function addNotice(){
+ const title=$('nTitle').value.trim(),message=$('nMessage').value.trim();
+ if(!title||!message)return;
+ const {error}=await sb.from('notices').insert({title,message,is_active:$('nActive').value==='true'});
+ if(error)return msg('superMsg',esc(error.message));$('nTitle').value='';$('nMessage').value='';await loadNoticesAdmin();await loadNotices();
+}
+async function loadNoticesAdmin(){
+ const {data,error}=await sb.from('notices').select('*').order('created_at',{ascending:false});
+ if(error){$('noticeList').innerHTML=esc(error.message);return}
+ $('noticeList').innerHTML=data.map(n=>`<div class="card"><b>${esc(n.title)}</b><p>${esc(n.message)}</p><span class="pill ${n.is_active?'active':'inactive'}">${n.is_active?'ACTIVE':'DEACTIVE'}</span> <button class="danger" onclick="deleteNotice(${n.id})">Delete</button></div>`).join('')||'<p>No notices.</p>';
+}
+async function deleteNotice(id){if(!confirm('Delete notice?'))return;const {error}=await sb.from('notices').delete().eq('id',id);if(error)return msg('superMsg',esc(error.message));loadNoticesAdmin();loadNotices()}
+async function loadNotices(){
+ const {data,error}=await sb.from('notices').select('title,message').eq('is_active',true).order('created_at',{ascending:false});
+ if(error||!data?.length){$('noticeBar').classList.add('hidden');return}
+ $('ticker').textContent=data.map(x=>x.title+' — '+x.message).join('   •   ');$('noticeBar').classList.remove('hidden');
+}
+function downloadID(){window.print()}
+async function boot(){
+ await loadNotices();await loadMembers();
+ const {data:{user}}=await sb.auth.getUser();currentUser=user||null;
+ if(currentUser)await loadMe();
+ const hash=location.hash;
+ if(hash.startsWith('#verify=')){$('verifyId').value=decodeURIComponent(hash.split('=')[1]||'');verifyMember()}
+}
+sb.auth.onAuthStateChange(async (_event,session)=>{currentUser=session?.user||null;if(currentUser)await loadMe()});
+boot();
+</script>
+</body>
+</html>
