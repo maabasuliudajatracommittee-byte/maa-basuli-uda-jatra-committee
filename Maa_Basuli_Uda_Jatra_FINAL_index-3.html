@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--red:#a40000;--red2:#e21b23;--dark:#260909;--gold:#f2b84b;--green:#08752a}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Oriya","Noto Sans",Arial,sans-serif;background:#faf6f5;color:#2d1616}
+header{background:linear-gradient(135deg,#650000,#b40000,#e21b23);color:#fff;padding:22px 16px;box-shadow:0 4px 18px #0003}
+.header{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(22px,5vw,40px)}header p{margin:5px 0}
+nav{max-width:1150px;margin:18px auto 0;display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;padding:9px 13px;border:1px solid #ffffff55;border-radius:22px;font-size:14px}
+section{max-width:1150px;margin:auto;padding:25px 16px}.title{text-align:center;color:var(--red);font-size:30px}
+.hero{text-align:center;padding-top:35px}.hero h2{font-size:clamp(34px,7vw,62px);color:var(--red);margin:15px 0 5px}
+.hero p{font-size:19px;line-height:1.8}.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 5px 25px #3d000015;border:1px solid #ead6d6;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin:5px 0 12px;font-size:15px}
+label{font-weight:bold;font-size:14px}.btn{border:0;background:var(--red2);color:#fff;padding:11px 17px;border-radius:8px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:4px}
+.btn.secondary{background:#444}.btn.green{background:var(--green)}.btn.gold{background:#9b6900}
+.notice{border-left:5px solid var(--red);background:#fff1f1;padding:14px;border-radius:8px;margin-bottom:15px}
+.ticker{overflow:hidden;white-space:nowrap;background:#fff3cd;border:1px solid #f0d98a;border-radius:10px;color:#6d4d00;padding:10px;font-weight:bold}
+.ticker span{display:inline-block;padding-left:100%;animation:scroll 18s linear infinite}@keyframes scroll{to{transform:translateX(-100%)}}
+.member-card{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.member-card img{width:85px;height:85px;object-fit:cover;border-radius:12px;border:3px solid var(--red)}
+.qrbox{text-align:center}.qrbox canvas{max-width:160px}.small{font-size:13px;color:#666}.ok{color:var(--green);font-weight:bold}.bad{color:#b40000;font-weight:bold}
+.profile-photo{width:135px;height:135px;object-fit:cover;border-radius:50%;border:4px solid var(--red);display:none}
+.status{display:inline-block;padding:5px 10px;border-radius:15px;font-weight:bold;font-size:12px}.active{background:#dff5e3;color:#08752a}.deactive{background:#ffe1e1;color:#a40000}
+.admin{display:none}.admin.show{display:block}.hidden{display:none!important}
+.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.social a{color:#fff;text-decoration:none;padding:18px;text-align:center;border-radius:12px;font-weight:bold}
+.ig{background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045)}.fb{background:#1877f2}.x{background:#111}.yt{background:#e62117}
+footer{background:#260909;color:#fff;text-align:center;padding:25px;line-height:1.8}
+@media(max-width:650px){.header{justify-content:center;text-align:center}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header">
+<div><h1>🌺 ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି</h1><p>ଠାକୁରମୁଣ୍ଡା, ମୟୂରଭଞ୍ଜ, ଓଡ଼ିଶା</p></div>
+<button class="btn secondary" onclick="openAdmin()">🔐 Admin</button>
+</div>
+<nav>
+<a href="#home">ମୁଖ୍ୟ ପୃଷ୍ଠା</a>
+<a href="#members">ସଦସ୍ୟ</a>
+<a href="#account">Login / Signup</a>
+<a href="#qr">QR Verification</a>
+<a href="#notices">Notice</a>
+<a href="#live">Live</a>
+<a href="#social">Social</a>
+<a href="#contact">ଯୋଗାଯୋଗ</a>
+</nav>
+</header>
+
+<section id="home" class="hero">
+<div class="ticker" onclick="location.hash='notices'"><span>📢 ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି — ନୂଆ Notice / Announcement ଦେଖିବା ପାଇଁ Click କରନ୍ତୁ</span></div>
+<div class="card">
+<div style="font-size:50px">🙏</div>
+<h2>ଜୟ ମା ବାସୁଳୀ</h2>
+<p><b>ପରମ୍ପରା • ଭକ୍ତି • ଏକତା • ସେବା</b></p>
+<p>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟିର ଅଧିକାରିକ ଡିଜିଟାଲ୍ ପ୍ଲାଟଫର୍ମ।</p>
+<a class="btn" href="#account">Member Signup</a>
+<a class="btn secondary" href="#members">Member List</a>
+</div>
+</section>
+
+<section id="members">
+<h2 class="title">👥 କମିଟି ସଦସ୍ୟ</h2>
+<div class="card">
+<input id="search" placeholder="ନାମ କିମ୍ବା Member ID ଖୋଜନ୍ତୁ..." oninput="renderMembers()">
+<div id="memberList"><div class="notice">Loading...</div></div>
+</div>
+</section>
+
+<section id="account">
+<h2 class="title">👤 Member Signup / Login</h2>
+<div class="card">
+<div id="loggedOut">
+<button class="btn" onclick="googleLogin()">🔵 Continue with Google</button>
+<hr>
+<div class="grid">
+<div><label>📧 Email</label><input id="authEmail" type="email" placeholder="Email Address"></div>
+<div><label>📱 Mobile Number</label><input id="authMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit Mobile Number"></div>
+<div><label>🔐 Password</label><input id="authPassword" type="password" minlength="6" placeholder="Minimum 6 characters"></div>
+</div>
+<p class="small">ℹ️ Mobile OTP ନାହିଁ। Signup ପାଇଁ Email + Mobile Number + Password ଦରକାର।</p>
+<button class="btn green" onclick="signup()">📝 Create Account</button>
+<button class="btn secondary" onclick="login()">🔐 Login</button>
+</div>
+
+<div id="loggedIn" class="hidden">
+<div class="grid">
+<div style="text-align:center">
+<img id="myPhoto" class="profile-photo" alt="Profile Photo">
+<div id="photoPlaceholder" style="font-size:85px">👤</div>
+<input id="photoFile" type="file" accept="image/*">
+<button class="btn" onclick="uploadPhoto()">📷 Upload Photo</button>
+</div>
+<div>
+<p><b>Member ID:</b> <span id="myMemberId">-</span></p>
+<p><b>Email:</b> <span id="myEmail">-</span></p>
+<p><b>Status:</b> <span id="myStatus">-</span></p>
+<label>Name</label><input id="myName" placeholder="Full Name">
+<label>Mobile Number</label><input id="myMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit Mobile Number">
+<label>Designation</label>
+<select id="myDesignation">
+<option>Member</option><option>Core Committee Member</option><option>Secretary</option><option>Vice Secretary</option><option>President</option><option>Vice President</option><option>Treasurer</option>
+</select>
+<label>Blood Group</label>
+<select id="myBlood"><option value="">Select Blood Group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
+<label>Village / Address</label><input id="myAddress" placeholder="Village / Address">
+<button class="btn green" onclick="saveProfile()">💾 Save Profile</button>
+<button class="btn secondary" onclick="logout()">Logout</button>
+</div>
+</div>
+<div id="myQr" class="card qrbox hidden"><h3>🎫 My Permanent QR</h3><canvas id="myQrCanvas"></canvas><p class="small">QR scan କଲେ live member profile ଖୋଲିବ।</p></div>
+</div>
+<div id="authMsg" class="notice hidden"></div>
+</div>
+</section>
+
+<section id="qr">
+<h2 class="title">🎫 QR Verification</h2>
+<div class="card">
+<p>Member ID ଦେଇ verification କରନ୍ତୁ।</p>
+<input id="verifyId" placeholder="ଉଦାହରଣ: MB001">
+<button class="btn" onclick="verify()">Verify Member</button>
+<div id="verifyResult"></div>
+</div>
+</section>
+
+<section id="notices">
+<h2 class="title">📢 Notice / Announcement</h2>
+<div id="noticeList"><div class="card">Loading notices...</div></div>
+</section>
+
+<section id="live">
+<h2 class="title">🔴 Live Telecast</h2>
+<div class="card" style="text-align:center">
+<h3>ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା — YouTube Live</h3>
+<a class="btn" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube Channel</a>
+</div>
+</section>
+
+<section id="social">
+<h2 class="title">📱 ଆମ ସୋସିଆଲ ମିଡିଆ</h2>
+<div class="social">
+<a class="ig" href="https://www.instagram.com/jaymaabasuli" target="_blank">Instagram<br>@jaymaabasuli</a>
+<a class="fb" href="https://www.facebook.com/share/14mPPFBt8e4/" target="_blank">Facebook<br>@jaymaabasuli</a>
+<a class="x" href="https://x.com/JayMaaBasuli" target="_blank">X<br>@JayMaaBasuli</a>
+<a class="yt" href="https://www.youtube.com/@jaymaabasuli" target="_blank">YouTube<br>@jaymaabasuli</a>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="title">📞 ଯୋଗାଯୋଗ</h2>
+<div class="card">
+<p><b>Mobile:</b> <a href="tel:8917437067">8917437067</a></p>
+<p><b>Email:</b> <a href="mailto:maabasuliudajatracommittee@gmail.com">maabasuliudajatracommittee@gmail.com</a></p>
+</div>
+</section>
+
+<section id="admin" class="admin">
+<h2 class="title">🔐 Admin Panel</h2>
+<div class="card" id="adminLoginBox">
+<h3>Admin Login</h3>
+<input id="adminEmail" type="email" placeholder="Admin Email">
+<input id="adminPassword" type="password" placeholder="Password">
+<button class="btn" onclick="adminLogin()">Login</button>
+<div id="adminMsg" class="notice hidden"></div>
+</div>
+
+<div class="card hidden" id="adminDashboard">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+<h3>Member Management</h3><button class="btn secondary" onclick="logout()">Logout</button>
+</div>
+<p class="small">Member ID database ଦ୍ୱାରା automatic ହୁଏ। ଏଠାରେ manually Member ID ଦେବାର option ନାହିଁ।</p>
+<div id="adminList"></div>
+</div>
+</section>
+
+<footer>
+<b>🌺 ଜୟ ମା ବାସୁଳୀ 🙏</b><br>
+ମା ବାସୁଳୀ ଉଡା ଯାତ୍ରା କମିଟି, ଠାକୁରମୁଣ୍ଡା
+</footer>
+
+<script>
+const SUPABASE_URL="https://nogwmbocptlbgzzpdjny.supabase.co";
+const SUPABASE_KEY="sb_publishable_bpa45-FlPLMmt4kBpbveJA_c95Noodr";
+const SUPER_ADMIN_EMAIL="maabasuliudajatracommittee@gmail.com";
+let sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let members=[];
+
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function msg(t,good=false){$("authMsg").className="notice";$("authMsg").textContent=t;$("authMsg").classList.remove("hidden");}
+function validMobile(v){return /^[6-9]\\d{9}$/.test(v);}
+
+async function loadMembers(){
+ const {data,error}=await sb.from("members").select("user_id,member_id,name,email,phone,address,designation,profile_photo_url,is_admin").order("member_id",{ascending:true});
+ if(error){$("memberList").innerHTML='<div class="notice">Database connect ହେଉନାହିଁ। Supabase SQL setup check କରନ୍ତୁ।</div>';return;}
+ members=data||[];renderMembers();renderAdmin();
+}
+function renderMembers(){
+ const q=($("search").value||"").toLowerCase();
+ const arr=members.filter(m=>(`${m.name||""} ${m.member_id||""} ${m.designation||""}`).toLowerCase().includes(q));
+ $("memberList").innerHTML=arr.length?arr.map(m=>`
+ <div class="member-card card">
+ <div>${m.profile_photo_url?`<img src="${esc(m.profile_photo_url)}">`:`<div style="font-size:70px">👤</div>`}</div>
+ <div style="flex:1"><h3 style="margin:0;color:#a40000">${esc(m.name||"Member")}</h3>
+ <p>${esc(m.designation||"Member")}<br><b>Member ID:</b> ${esc(m.member_id||"-")}<br>${esc(m.phone||"")}</p></div>
+ <div class="qrbox"><canvas id="qr_${esc(m.member_id)}" width="145" height="145"></canvas><div class="small">Scan to verify</div></div>
+ </div>`).join(""):"<p>କୌଣସି ସଦସ୍ୟ ମିଳିଲେ ନାହିଁ।";
+ arr.forEach(m=>{const c=$("qr_"+m.member_id);if(c)new QRious({element:c,size:145,value:location.href.split("#")[0]+"#verify="+encodeURIComponent(m.member_id)});});
+}
+async function signup(){
+ const email=$("authEmail").value.trim(),mobile=$("authMobile").value.trim(),password=$("authPassword").value;
+ if(!email||!mobile||!password)return msg("Email, Mobile Number ଏବଂ Password ଦିଅନ୍ତୁ।");
+ if(!validMobile(mobile))return msg("ଠିକ୍ 10 digit Indian Mobile Number ଦିଅନ୍ତୁ।");
+ if(password.length<6)return msg("Password କମରେ 6 characters ହେବା ଦରକାର।");
+ const {error}=await sb.auth.signUp({email,password,options:{data:{mobile:mobile},emailRedirectTo:location.href.split("#")[0]}});
+ if(error)return msg(error.message);
+ msg("✅ Account created. ଯଦି Email Confirmation ON ଅଛି, email ରେ ଆସିଥିବା verification complete କରନ୍ତୁ। Mobile OTP କିଛି ଯିବ ନାହିଁ।",true);
+}
+async function login(){
+ const email=$("authEmail").value.trim(),password=$("authPassword").value;
+ if(!email||!password)return msg("Email ଏବଂ Password ଦିଅନ୍ତୁ।");
+ const {error}=await sb.auth.signInWithPassword({email,password});
+ if(error)return msg(error.message);await loadProfile();
+}
+async function googleLogin(){const {error}=await sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.href.split("#")[0]}});if(error)msg(error.message);}
+async function ensureMember(user){
+ const {data:m}=await sb.from("members").select("*").eq("user_id",user.id).maybeSingle();
+ if(m){
+   const mobile=user.user_metadata?.mobile;
+   if(mobile && !m.phone) await sb.from("members").update({phone:mobile}).eq("user_id",user.id);
+   return;
+ }
+ const mobile=user.user_metadata?.mobile||"";
+ await sb.from("members").insert({user_id:user.id,name:user.user_metadata?.full_name||user.user_metadata?.name||"Member",email:user.email||"",phone:mobile,designation:"Member"});
+}
+async function loadProfile(){
+ const {data:{user}}=await sb.auth.getUser();
+ if(!user){$("loggedOut").classList.remove("hidden");$("loggedIn").classList.add("hidden");return;}
+ await ensureMember(user);
+ const {data:m,error}=await sb.from("members").select("*").eq("user_id",user.id).maybeSingle();
+ if(error||!m)return msg("Profile load failed: "+(error?.message||"Member not found"));
+ $("loggedOut").classList.add("hidden");$("loggedIn").classList.remove("hidden");
+ $("myMemberId").textContent=m.member_id||"-";$("myEmail").textContent=m.email||user.email||"-";
+ $("myName").value=m.name||"";$("myMobile").value=m.phone||"";$("myAddress").value=m.address||"";
+ $("myDesignation").value=m.designation||"Member";$("myBlood").value=m.blood_group||"";
+ $("myStatus").innerHTML=`<span class="status ${m.is_active===false?"deactive":"active"}">${m.is_active===false?"DEACTIVE":"ACTIVE"}</span>`;
+ if(m.profile_photo_url){$("myPhoto").src=m.profile_photo_url;$("myPhoto").style.display="block";$("photoPlaceholder").style.display="none";}
+ else{$("myPhoto").style.display="none";$("photoPlaceholder").style.display="block";}
+ $("myQr").classList.remove("hidden");
+ new QRious({element:$("myQrCanvas"),size:190,value:location.href.split("#")[0]+"#verify="+encodeURIComponent(m.member_id)});
+}
+async function saveProfile(){
+ const mobile=$("myMobile").value.trim();
+ if(!validMobile(mobile))return msg("ଠିକ୍ 10 digit Mobile Number ଦିଅନ୍ତୁ।");
+ const {data:{user}}=await sb.auth.getUser();if(!user)return;
+ const {error}=await sb.from("members").update({name:$("myName").value.trim(),phone:mobile,address:$("myAddress").value.trim(),designation:$("myDesignation").value,blood_group:$("myBlood").value}).eq("user_id",user.id);
+ if(error)return msg("Profile save failed: "+error.message);
+ msg("✅ Profile updated successfully.");await loadProfile();await loadMembers();
+}
+async function uploadPhoto(){
+ const f=$("photoFile").files[0];if(!f)return msg("ପ୍ରଥମେ photo select କରନ୍ତୁ।");
+ if(!f.type.startsWith("image/"))return msg("କେବଳ image upload କରନ୍ତୁ।");
+ if(f.size>5*1024*1024)return msg("Photo 5MB ଠାରୁ କମ୍ ରଖନ୍ତୁ।");
+ const {data:{user}}=await sb.auth.getUser();if(!user)return;
+ const ext=(f.name.split(".").pop()||"jpg").toLowerCase(),path=user.id+"/profile."+ext;
+ const {error}=await sb.storage.from("profile-photos").upload(path,f,{upsert:true,contentType:f.type});
+ if(error)return msg("Photo upload failed: "+error.message);
+ const {data:u}=sb.storage.from("profile-photos").getPublicUrl(path);
+ const {error:e}=await sb.from("members").update({profile_photo_url:u.publicUrl}).eq("user_id",user.id);
+ if(e)return msg(e.message);msg("✅ Photo uploaded.");await loadProfile();await loadMembers();
+}
+async function verify(){
+ const id=$("verifyId").value.trim();if(!id)return;
+ const {data:m}=await sb.from("members").select("member_id,name,phone,designation,profile_photo_url,is_admin").eq("member_id",id).maybeSingle();
+ if(!m){$("verifyResult").innerHTML='<div class="card bad">❌ Member Not Found</div>';return;}
+ $("verifyResult").innerHTML=`<div class="card" style="text-align:center"><h3 class="ok">✅ Member Found</h3>${m.profile_photo_url?`<img src="${esc(m.profile_photo_url)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover">`:""}<p><b>Name:</b> ${esc(m.name)}<br><b>Member ID:</b> ${esc(m.member_id)}<br><b>Mobile:</b> ${esc(m.phone)}<br><b>Designation:</b> ${esc(m.designation)}</p></div>`;
+}
+async function loadNotices(){
+ const {data,error}=await sb.from("notices").select("*").eq("is_active",true).order("created_at",{ascending:false});
+ if(error){$("noticeList").innerHTML='<div class="card">Notice system database setup ପରେ active ହେବ।</div>';return;}
+ $("noticeList").innerHTML=(data||[]).map(n=>`<div class="card"><h3>${esc(n.title||"Notice")}</h3><p>${esc(n.content||"")}</p><div class="small">${n.is_pinned?"📌 Pinned • ":""}${new Date(n.created_at).toLocaleDateString("en-IN")}</div></div>`).join("")||'<div class="card">ବର୍ତ୍ତମାନ କୌଣସି notice ନାହିଁ।</div>';
+}
+async function adminLogin(){
+ const email=$("adminEmail").value.trim(),password=$("adminPassword").value;
+ const {error}=await sb.auth.signInWithPassword({email,password});
+ if(error){$("adminMsg").textContent=error.message;$("adminMsg").classList.remove("hidden");return;}
+ const {data:{user}}=await sb.auth.getUser();
+ const {data:m}=await sb.from("members").select("is_admin,email").eq("user_id",user.id).maybeSingle();
+ if(!m?.is_admin){await sb.auth.signOut();$("adminMsg").textContent="ଏହି account କୁ Admin access ନାହିଁ।";$("adminMsg").classList.remove("hidden");return;}
+ $("adminLoginBox").classList.add("hidden");$("adminDashboard").classList.remove("hidden");renderAdmin();
+}
+function openAdmin(){location.hash="admin";$("admin").classList.add("show");}
+async function renderAdmin(){
+ const {data:{user}}=await sb.auth.getUser();if(!user)return;
+ const {data:me}=await sb.from("members").select("is_admin,email").eq("user_id",user.id).maybeSingle();if(!me?.is_admin)return;
+ $("adminList").innerHTML=members.map(m=>`<div class="card"><b>${esc(m.member_id)} — ${esc(m.name||"Member")}</b><br>${esc(m.designation||"Member")} | ${esc(m.phone||"")}<br><span class="small">${esc(m.email||"")}</span><div><button class="btn" onclick="adminEdit('${encodeURIComponent(m.member_id)}')">✏️ Edit</button><button class="btn secondary" onclick="adminDelete('${encodeURIComponent(m.member_id)}')">🗑️ Delete</button></div></div>`).join("");
+}
+async function adminEdit(enc){
+ const id=decodeURIComponent(enc),m=members.find(x=>x.member_id===id);if(!m)return;
+ const name=prompt("Name:",m.name||"");if(name===null)return;
+ const phone=prompt("Mobile:",m.phone||"");if(phone===null)return;
+ if(!validMobile(phone))return alert("Invalid mobile number");
+ const designation=prompt("Designation:",m.designation||"Member");if(designation===null)return;
+ const {error}=await sb.from("members").update({name,phone,designation}).eq("member_id",id);if(error)alert(error.message);else{await loadMembers();alert("Updated");}
+}
+async function adminDelete(enc){
+ const id=decodeURIComponent(enc);if(!confirm("ଏହି Member record delete କରିବେ?"))return;
+ const {error}=await sb.from("members").delete().eq("member_id",id);if(error)alert(error.message);else await loadMembers();
+}
+async function logout(){await sb.auth.signOut();$("admin").classList.remove("show");$("adminLoginBox").classList.remove("hidden");$("adminDashboard").classList.add("hidden");await loadProfile();}
+sb.auth.onAuthStateChange(()=>setTimeout(loadProfile,0));
+loadMembers();loadProfile();loadNotices();
+if(location.hash.startsWith("#verify=")){ $("verifyId").value=decodeURIComponent(location.hash.substring(8)); setTimeout(verify,500); }
+</script>
+</body>
+</html>
