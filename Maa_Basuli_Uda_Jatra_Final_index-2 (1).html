@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="or">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maa Basuli Uda Jatra Committee</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#fff8ef;color:#24120d}
+header{background:linear-gradient(135deg,#650000,#b51f23);color:#fff;padding:14px}
+.head,main{max-width:1100px;margin:auto}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:22px}nav{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:700}
+nav button{background:#ffffff20;color:#fff;border:1px solid #ffffff55}.primary{background:#a40000;color:#fff}.secondary{background:#444;color:#fff}.success{background:#087f23;color:#fff}.danger{background:#a40000;color:#fff}
+main{padding:18px}.card{background:#fff;border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 4px 18px #0001}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}input,select,textarea{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin:5px 0 10px}
+.hidden{display:none!important}.notice{background:#fff0b8;border:1px solid #d9ae3c;padding:12px;border-radius:10px;margin-bottom:14px;cursor:pointer}
+.member{display:flex;gap:12px;align-items:center}.member img{width:64px;height:64px;border-radius:50%;object-fit:cover;background:#eee}
+.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#eee;font-size:12px;font-weight:700}.active{background:#d9f6df;color:#087f23}.inactive{background:#ffdede;color:#a40000}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #ddd;text-align:left;font-size:14px}
+.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:15px;z-index:20}.modalbox{background:#fff;border-radius:14px;padding:18px;max-width:650px;width:100%;max-height:90vh;overflow:auto}
+.small{font-size:12px;color:#666}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.idcard{width:360px;max-width:100%;border:4px solid #a40000;border-radius:16px;padding:15px;text-align:center;margin:auto}
+.idphoto{width:100px;height:100px;border-radius:10px;object-fit:cover}
+</style>
+</head>
+<body>
+<header><div class="head">
+<div><h1>ମା' ବାସୁଳୀ ଉଡ଼ା ଯାତ୍ରା କମିଟି</h1><div>Thakurmunda, Mayurbhanj, Odisha</div></div>
+<nav>
+<button onclick="show('home')">Home</button><button onclick="show('members')">Members</button>
+<button onclick="show('login')">Login</button><button onclick="show('verify')">QR Verify</button><button onclick="show('admin')">Admin</button>
+</nav></div></header>
+
+<main>
+<div id="noticeBar" class="notice hidden" onclick="openNotices()">📢 <b id="noticeTitle"></b> — <span id="noticeText"></span></div>
+
+<section id="home">
+<div class="card"><h2>Official Committee Portal</h2>
+<p>Member registration, approval, live profile, QR verification and digital ID card.</p>
+<div class="grid"><button class="primary" onclick="show('login')">Member Login / Registration</button><button class="secondary" onclick="show('verify')">Verify Member</button></div>
+</div></section>
+
+<section id="members" class="hidden"><div class="card"><div class="top"><h2>Approved Members</h2><button class="primary" onclick="loadMembers()">Refresh</button></div><div id="memberList">Loading...</div></div></section>
+
+<section id="login" class="hidden"><div class="card"><h2>Member Login</h2><div class="grid">
+<div><label>Email</label><input id="email" type="email"><label>Password</label><input id="password" type="password">
+<button class="primary" onclick="signup()">Create Account</button> <button class="secondary" onclick="login()">Login</button><button onclick="googleLogin()">Google</button></div>
+<div><label>Mobile OTP</label><input id="phone" placeholder="+91XXXXXXXXXX"><button class="success" onclick="sendOTP()">Send OTP</button>
+<input id="otp" placeholder="OTP"><button class="primary" onclick="verifyOTP()">Verify OTP</button><p class="small">SMS OTP requires a configured Supabase SMS provider.</p></div>
+</div><p id="authMsg"></p></div></section>
+
+<section id="profile" class="hidden"><div class="card"><div class="top"><h2>My Profile</h2><button class="secondary" onclick="logout()">Logout</button></div><div id="profileBox"></div></div></section>
+
+<section id="verify" class="hidden"><div class="card"><h2>QR / Member ID Verification</h2>
+<p>Enter the Member ID printed on the digital ID.</p><input id="verifyId" placeholder="MB001"><button class="primary" onclick="verifyMember()">Verify</button><div id="verifyResult"></div></div></section>
+
+<section id="admin" class="hidden"><div class="card"><h2>Admin Panel</h2><div id="adminGate">Checking access...</div></div></section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modalbox"><div class="top"><h2>Notices</h2><button onclick="closeModal()">✕</button></div><div id="noticeList"></div></div></div>
+
+<script>
+const SUPABASE_URL="https://nogwmbocptlbgzzpdjny.supabase.co";
+const SUPABASE_KEY="sb_publishable_bpa45-FlPLMmt4kBpbveJA_c95Noodr";
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+function $(id){return document.getElementById(id)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function show(id){document.querySelectorAll('main>section').forEach(x=>x.classList.add('hidden'));$(id)?.classList.remove('hidden');if(id==='members')loadMembers();if(id==='profile')loadProfile();if(id==='admin')loadAdmin()}
+async function user(){return (await db.auth.getUser()).data.user}
+async function signup(){let e=$('email').value.trim(),p=$('password').value;if(!e||p.length<6)return $('authMsg').textContent='Enter email and minimum 6 character password.';let r=await db.auth.signUp({email:e,password:p});$('authMsg').textContent=r.error?r.error.message:'Registration successful. Check email confirmation if enabled.'}
+async function login(){let r=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(r.error)return $('authMsg').textContent=r.error.message;show('profile');loadProfile()}
+async function googleLogin(){let r=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});if(r.error)$('authMsg').textContent=r.error.message}
+async function sendOTP(){let r=await db.auth.signInWithOtp({phone:$('phone').value.trim()});$('authMsg').textContent=r.error?r.error.message:'OTP sent.'}
+async function verifyOTP(){let r=await db.auth.verifyOtp({phone:$('phone').value.trim(),token:$('otp').value.trim(),type:'sms'});if(r.error)return $('authMsg').textContent=r.error.message;show('profile');loadProfile()}
+async function logout(){await db.auth.signOut();location.reload()}
+
+async function loadProfile(){
+ let u=await user();if(!u){show('login');return}
+ let r=await db.from('members').select('*').eq('user_id',u.id).maybeSingle();
+ if(r.error)return $('profileBox').innerHTML='<p>'+esc(r.error.message)+'</p>';
+ if(!r.data)return $('profileBox').innerHTML='<p>Profile record not found. Please contact the committee.</p>';
+ let m=r.data;
+ $('profileBox').innerHTML=`<div class="member"><img src="${esc(m.profile_photo_url||'')}"><div><b>${esc(m.name||'')}</b><br><span class="badge">${esc(m.member_id||'Pending')}</span></div></div>
+ <hr><div class="grid">
+ <div><label>Name</label><input id="pn" value="${esc(m.name||'')}"><label>Mobile</label><input id="pp" value="${esc(m.phone||'')}"><label>Address</label><textarea id="pa">${esc(m.address||'')}</textarea></div>
+ <div><label>Blood Group</label><input id="pb" value="${esc(m.blood_group||'')}"><label>Profile Photo URL</label><input id="pu" value="${esc(m.profile_photo_url||'')}"><label>Designation Requested</label><input id="pd" value="${esc(m.designation_requested||'')}"></div></div>
+ <button class="primary" onclick="saveProfile()">Save Profile</button>
+ <button class="secondary" onclick="makeID()">Digital ID Card</button>
+ <p>Approval: <b>${esc(m.approval_status||'PENDING')}</b> &nbsp; Status: <b>${esc(m.status||'ACTIVE')}</b></p>`;
+}
+async function saveProfile(){
+ let u=await user();let p={name:$('pn').value.trim(),phone:$('pp').value.trim(),address:$('pa').value.trim(),blood_group:$('pb').value.trim(),profile_photo_url:$('pu').value.trim()||null,designation_requested:$('pd').value.trim()};
+ p.profile_complete=!!(p.name&&p.phone&&p.profile_photo_url);
+ let r=await db.from('members').update(p).eq('user_id',u.id);alert(r.error?r.error.message:'Profile saved successfully.');if(!r.error)loadProfile()
+}
+async function getMember(id){let r=await db.rpc('get_public_member',{p_member_id:id});return r}
+async function verifyMember(){let id=$('verifyId').value.trim();if(!id)return;$('verifyResult').innerHTML='Checking...';let r=await getMember(id);if(r.error||!r.data?.length)return $('verifyResult').innerHTML='<div class="card">Member not found.</div>';let m=r.data[0];$('verifyResult').innerHTML=`<div class="card" style="text-align:center"><img class="idphoto" src="${esc(m.profile_photo_url||'')}"><h2>${esc(m.name)}</h2><p><b>Member ID:</b> ${esc(m.member_id)}</p><p><b>Mobile:</b> ${esc(m.phone)}</p><p><b>Designation:</b> ${esc(m.designation||'Member')}</p><p><b>Blood Group:</b> ${esc(m.blood_group||'-')}</p><span class="badge ${m.status==='ACTIVE'?'active':'inactive'}">${esc(m.status||'UNKNOWN')}</span></div>`}
+async function loadMembers(){let r=await db.from('members').select('member_id,name,phone,designation,blood_group,profile_photo_url,status,approval_status').eq('approval_status','APPROVED').neq('status','DELETED').order('member_id');if(r.error)return $('memberList').innerHTML='<p>'+esc(r.error.message)+'</p>';$('memberList').innerHTML=(r.data||[]).map(m=>`<div class="card member"><img src="${esc(m.profile_photo_url||'')}"><div><b>${esc(m.name||'')}</b><br>${esc(m.designation||'Member')}<br><span class="badge">${esc(m.member_id||'')}</span> <span class="badge ${m.status==='ACTIVE'?'active':'inactive'}">${esc(m.status||'')}</span></div></div>`).join('')||'<p>No approved members.</p>'}
+
+async function loadAdmin(){
+ let u=await user();if(!u)return $('adminGate').innerHTML='<p>Please login.</p>';
+ let a=await db.from('admin_users').select('*').eq('user_id',u.id).eq('active',true).maybeSingle();
+ if(a.error||!a.data)return $('adminGate').innerHTML='<p>Access denied. Admin account required.</p>';
+ let h=`<p>Admin: <b>${esc(a.data.email)}</b> — <span class="badge">${esc(a.data.role)}</span></p>`;
+ let r=await db.from('members').select('*').order('created_at',{ascending:false});
+ if(r.error)return $('adminGate').innerHTML=h+'<p>'+esc(r.error.message)+'</p>';
+ h+='<div style="overflow:auto"><table><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Approval</th><th>Status</th><th>Action</th></tr>';
+ (r.data||[]).forEach(m=>{h+=`<tr><td>${esc(m.member_id)}</td><td>${esc(m.name||'')}</td><td>${esc(m.phone||'')}</td><td>${esc(m.approval_status||'')}</td><td>${esc(m.status||'')}</td><td><button class="success" onclick="approve('${esc(m.member_id)}')">Approve</button> <button class="secondary" onclick="setStatus('${esc(m.member_id)}','${m.status==='ACTIVE'?'DEACTIVE':'ACTIVE'}')">${m.status==='ACTIVE'?'Deactivate':'Activate'}</button></td></tr>`});
+ $('adminGate').innerHTML=h+'</table></div>';
+}
+async function approve(id){let r=await db.rpc('approve_member',{p_member_id:id});if(r.error)alert(r.error.message);else loadAdmin()}
+async function setStatus(id,status){let r=await db.from('members').update({status}).eq('member_id',id);if(r.error)alert(r.error.message);else loadAdmin()}
+
+async function loadNotices(){let r=await db.from('notices').select('*').eq('active',true).order('created_at',{ascending:false});if(r.data?.length){$('noticeBar').classList.remove('hidden');$('noticeTitle').textContent=r.data[0].title;$('noticeText').textContent=r.data[0].body}}
+async function openNotices(){let r=await db.from('notices').select('*').eq('active',true).order('created_at',{ascending:false});$('noticeList').innerHTML=(r.data||[]).map(n=>`<div class="card"><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p></div>`).join('')||'No notices.';$('modal').classList.remove('hidden')}
+function closeModal(){$('modal').classList.add('hidden')}
+
+async function makeID(){
+ let u=await user();let r=await db.from('members').select('member_id,name,phone,designation,blood_group,profile_photo_url,status').eq('user_id',u.id).single();if(r.error||!r.data?.member_id)return alert('Member ID is not generated yet.');
+ let m=r.data,w=window.open('','_blank');if(!w)return alert('Please allow pop-ups.');
+ w.document.write(`<html><head><title>Digital ID</title><style>body{font-family:Arial;background:#eee;padding:20px}.id{background:white;border:4px solid #a40000;border-radius:16px;padding:18px;text-align:center;max-width:360px;margin:auto}.photo{width:100px;height:100px;border-radius:10px;object-fit:cover}</style></head><body><div class="id"><h2>MAA BASULI UDA JATRA COMMITTEE</h2><img class="photo" src="${esc(m.profile_photo_url||'')}"><h2>${esc(m.name)}</h2><p><b>Member ID: ${esc(m.member_id)}</b></p><p>${esc(m.designation||'Member')} | ${esc(m.blood_group||'-')}</p><p>${esc(m.phone||'')}</p><canvas id="q"></canvas><br><button onclick="print()">Print / Save PDF</button></div><script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"><\/script><script>new QRious({element:document.getElementById('q'),value:${JSON.stringify(location.href.split('?')[0]+'?member='+m.member_id)},size:170})<\/script></body></html>`);w.document.close()
+}
+db.auth.onAuthStateChange((e,s)=>{if(s&&e==='SIGNED_IN')setTimeout(()=>{show('profile');loadProfile()},0)});
+loadNotices();loadMembers();
+let q=new URLSearchParams(location.search).get('member');if(q){show('verify');$('verifyId').value=q;verifyMember()}
+</script>
+</body>
+</html>
