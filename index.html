@@ -6,6 +6,7 @@
 <title>Maa Basuli Uda Jatra Committee</title>
 <meta name="description" content="Maa Basuli Uda Jatra Committee, Thakurmunda, Mayurbhanj, Odisha">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -24,7 +25,7 @@ header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid 
 .heroInner{max-width:850px;color:#fff}
 .hero h1{font-size:clamp(32px,6vw,62px);margin:0 0 12px}
 .hero p{font-size:clamp(17px,2.5vw,22px);margin:8px 0}
-.btn{display:inline-block;background:#fff;color:#7b1e1e;padding:12px 18px;border-radius:9px;font-weight:700;margin:8px 5px}
+.btn{display:inline-block;background:#fff;color:#7b1e1e;padding:12px 18px;border-radius:9px;font-weight:700;margin:8px 5px;border:0;cursor:pointer}
 .btn.dark{background:#7b1e1e;color:#fff}
 section{max-width:1180px;margin:auto;padding:55px 18px}
 .sectionTitle{text-align:center;margin:0 0 26px;color:#7b1e1e}
@@ -40,220 +41,1049 @@ section{max-width:1180px;margin:auto;padding:55px 18px}
 .social{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .social a{background:#7b1e1e;color:#fff;padding:10px 15px;border-radius:9px}
 footer{background:#3d1717;color:#fff;padding:35px 18px;text-align:center}
-.loading{padding:30px;text-align:center;color:#68717a}
-#pagesArea .pageBlock{margin-bottom:20px}
-.contact{text-align:center}
+
+/* LOGIN */
+.loginModal{display:none;position:fixed;inset:0;z-index:100;background:#0009;align-items:center;justify-content:center;padding:18px}
+.loginBox{width:min(470px,100%);background:#fff;border-radius:16px;padding:24px;box-shadow:0 12px 40px #0005;max-height:90vh;overflow:auto}
+.loginBox h2{margin:0 0 8px;color:#7b1e1e}
+.loginOptions{display:grid;gap:12px;margin-top:18px}
+.loginOption{width:100%;padding:15px;border:1px solid #ddd;border-radius:10px;background:#faf7f2;color:#7b1e1e;font-weight:700;text-align:left;cursor:pointer}
+.loginOption:hover{background:#f3e5d8}
+.loginForm{display:none}
+.loginForm.active{display:block}
+.loginBox label{display:block;font-weight:700;margin:12px 0 5px}
+.loginBox input{width:100%;padding:11px;border:1px solid #ccd3da;border-radius:8px;font-size:15px}
+.loginActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.loginMsg{padding:10px;border-radius:8px;margin-top:12px;white-space:pre-wrap}
+.loginMsg.ok{background:#e8f7ee;color:#176b38}
+.loginMsg.bad{background:#fdecec;color:#9d1c1c}
+.loginClose{float:right;background:#555;color:#fff;border:0;border-radius:7px;padding:7px 10px;cursor:pointer}
+.loginBack{background:#eee!important;color:#333!important}
+.signupLink{display:inline-block;margin-top:12px;color:#7b1e1e;font-weight:700;cursor:pointer}
+
 @media(max-width:800px){
- .navlinks{display:none;position:absolute;left:0;right:0;top:73px;background:#fff;padding:10px 18px;border-bottom:1px solid #ddd}
- .navlinks.open{display:flex;flex-direction:column}
- .navlinks a{padding:12px}
- .menu{display:block}
- .brand span{font-size:14px}
+.navlinks{display:none;position:absolute;left:0;right:0;top:73px;background:#fff;padding:10px 18px;border-bottom:1px solid #ddd}
+.navlinks.open{display:flex;flex-direction:column}
+.navlinks a{padding:12px}
+.menu{display:block}
+.brand span{font-size:14px}
 }
 </style>
 </head>
+
 <body>
-<div class="top" id="topNotice">Maa Basuli Uda Jatra Committee • Thakurmunda, Mayurbhanj, Odisha</div>
+
+<div class="top" id="topNotice">
+Maa Basuli Uda Jatra Committee • Thakurmunda, Mayurbhanj, Odisha
+</div>
 
 <header>
 <nav class="nav">
-  <a href="#home" class="brand">
-    <img id="siteLogo" class="logo" alt="Maa Basuli" style="display:none">
-    <span id="siteName">Maa Basuli Uda Jatra Committee</span>
-  </a>
-  <button class="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
-  <div id="navlinks" class="navlinks">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#notices">Notices</a>
-    <a href="#events">Events</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </div>
+
+<a href="#home" class="brand">
+<img id="siteLogo" class="logo" alt="Maa Basuli" style="display:none">
+<span id="siteName">Maa Basuli Uda Jatra Committee</span>
+</a>
+
+<button class="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+
+<div id="navlinks" class="navlinks">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#notices">Notices</a>
+<a href="#events">Events</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+<a href="javascript:void(0)" onclick="openLogin()">Login</a>
+</div>
+
 </nav>
 </header>
 
 <main>
+
 <section id="home" class="hero">
- <div class="heroInner">
-   <h1 id="heroTitle">Maa Basuli Uda Jatra</h1>
-   <p id="heroTagline">Maa Basuli Uda Jatra Committee, Thakurmunda</p>
-   <p id="heroLocation">Thakurmunda, Mayurbhanj, Odisha</p>
-   <a class="btn" href="#events">View Events</a>
-   <a class="btn" href="#gallery">View Gallery</a>
- </div>
+<div class="heroInner">
+<h1 id="heroTitle">Maa Basuli Uda Jatra</h1>
+<p id="heroTagline">Maa Basuli Uda Jatra Committee, Thakurmunda</p>
+<p id="heroLocation">Thakurmunda, Mayurbhanj, Odisha</p>
+<a class="btn" href="#events">View Events</a>
+<a class="btn" href="#gallery">View Gallery</a>
+</div>
 </section>
 
 <section id="about">
- <h2 class="sectionTitle">About Maa Basuli Uda Jatra</h2>
- <div id="aboutArea" class="card loading">Loading...</div>
+<h2 class="sectionTitle">About Maa Basuli Uda Jatra</h2>
+<div id="aboutArea" class="card">Loading...</div>
 </section>
 
 <section id="notices">
- <h2 class="sectionTitle">Latest Notices</h2>
- <div id="noticeArea" class="grid"><div class="loading">Loading...</div></div>
+<h2 class="sectionTitle">Latest Notices</h2>
+<div id="noticeArea" class="grid">
+<div class="loading">Loading...</div>
+</div>
 </section>
 
 <section id="events">
- <h2 class="sectionTitle">Events</h2>
- <div id="eventArea" class="grid"><div class="loading">Loading...</div></div>
+<h2 class="sectionTitle">Events</h2>
+<div id="eventArea" class="grid">
+<div class="loading">Loading...</div>
+</div>
 </section>
 
 <section id="gallery">
- <h2 class="sectionTitle">Gallery</h2>
- <div id="galleryArea" class="grid gallery"><div class="loading">Loading...</div></div>
+<h2 class="sectionTitle">Gallery</h2>
+<div id="galleryArea" class="grid gallery">
+<div class="loading">Loading...</div>
+</div>
 </section>
 
 <section id="pagesAreaWrap">
- <h2 class="sectionTitle">Information</h2>
- <div id="pagesArea"><div class="loading">Loading...</div></div>
+<h2 class="sectionTitle">Information</h2>
+<div id="pagesArea">
+<div class="loading">Loading...</div>
+</div>
 </section>
 
 <section id="contact">
- <h2 class="sectionTitle">Contact</h2>
- <div class="card contact">
-   <p><b>Maa Basuli Uda Jatra Committee</b></p>
-   <p id="contactAddress">Thakurmunda, Mayurbhanj, Odisha</p>
-   <p>📞 <a id="phoneLink" href="tel:8917437067">8917437067</a></p>
-   <p>✉️ <a id="emailLink" href="mailto:maabasuliudajatracommittee@gmail.com">maabasuliudajatracommittee@gmail.com</a></p>
-   <div class="social">
-     <a id="instagram" target="_blank" rel="noopener">Instagram</a>
-     <a id="facebook" target="_blank" rel="noopener">Facebook</a>
-     <a id="xlink" target="_blank" rel="noopener">X</a>
-     <a id="youtube" target="_blank" rel="noopener">YouTube</a>
-   </div>
- </div>
+<h2 class="sectionTitle">Contact</h2>
+
+<div class="card" style="text-align:center">
+
+<p><b>Maa Basuli Uda Jatra Committee</b></p>
+
+<p id="contactAddress">
+Thakurmunda, Mayurbhanj, Odisha
+</p>
+
+<p>
+📞 <a id="phoneLink" href="tel:8917437067">8917437067</a>
+</p>
+
+<p>
+✉️ <a id="emailLink" href="mailto:maabasuliudajatracommittee@gmail.com">
+maabasuliudajatracommittee@gmail.com
+</a>
+</p>
+
+<div class="social">
+
+<a id="instagram" target="_blank" rel="noopener">Instagram</a>
+
+<a id="facebook" target="_blank" rel="noopener">Facebook</a>
+
+<a id="xlink" target="_blank" rel="noopener">X</a>
+
+<a id="youtube" target="_blank" rel="noopener">YouTube</a>
+
+</div>
+
+</div>
 </section>
+
 </main>
 
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="loginModal"
+onclick="if(event.target===this)closeLogin()">
+
+<div class="loginBox">
+
+<button class="loginClose" onclick="closeLogin()">✕</button>
+
+<div id="loginChooser">
+
+<h2>Login</h2>
+
+<p class="muted">
+Choose your account type.
+</p>
+
+<div class="loginOptions">
+
+<button class="loginOption"
+onclick="showLoginForm('member')">
+👤 Member Login
+</button>
+
+<button class="loginOption"
+onclick="showLoginForm('admin')">
+🛡️ Admin Login
+</button>
+
+<button class="loginOption"
+onclick="showLoginForm('super')">
+👑 Super Admin Login
+</button>
+
+</div>
+</div>
+
+<!-- MEMBER LOGIN -->
+
+<div id="memberLogin" class="loginForm">
+
+<h2>Member Login</h2>
+
+<label>Email</label>
+<input id="memberEmail" type="email" autocomplete="email">
+
+<label>Password</label>
+<input id="memberPassword" type="password" autocomplete="current-password">
+
+<div class="loginActions">
+
+<button class="btn dark" onclick="memberLogin()">
+Login
+</button>
+
+<button class="btn loginBack" onclick="backToLoginOptions()">
+Back
+</button>
+
+</div>
+
+<span class="signupLink" onclick="showSignup()">
+New member? Signup
+</span>
+
+<div id="memberMsg"></div>
+
+</div>
+
+<!-- MEMBER SIGNUP -->
+
+<div id="memberSignup" class="loginForm">
+
+<h2>Member Signup</h2>
+
+<p class="muted">
+Create your member account. Email verification will be required.
+</p>
+
+<label>Name</label>
+<input id="signupName" type="text">
+
+<label>Mobile Number</label>
+<input id="signupMobile" type="tel" inputmode="numeric" maxlength="10">
+
+<label>Email</label>
+<input id="signupEmail" type="email" autocomplete="email">
+
+<label>Password</label>
+<input id="signupPassword" type="password" autocomplete="new-password">
+
+<label>Confirm Password</label>
+<input id="signupConfirm" type="password" autocomplete="new-password">
+
+<div class="loginActions">
+
+<button class="btn dark" onclick="memberSignup()">
+Create Account
+</button>
+
+<button class="btn loginBack" onclick="showLoginForm('member')">
+Back
+</button>
+
+</div>
+
+<div id="signupMsg"></div>
+
+</div>
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminLogin" class="loginForm">
+
+<h2>Admin Login</h2>
+
+<label>Admin Email / Login ID</label>
+<input id="adminEmail" type="email" autocomplete="username">
+
+<label>Password</label>
+<input id="adminPassword" type="password" autocomplete="current-password">
+
+<div class="loginActions">
+
+<button class="btn dark" onclick="adminLogin()">
+Login
+</button>
+
+<button class="btn loginBack" onclick="backToLoginOptions()">
+Back
+</button>
+
+</div>
+
+<div id="adminMsg"></div>
+
+</div>
+
+<!-- SUPER ADMIN LOGIN -->
+
+<div id="superLogin" class="loginForm">
+
+<h2>Super Admin Login</h2>
+
+<label>Email</label>
+<input id="superEmail" type="email" autocomplete="username">
+
+<label>Password</label>
+<input id="superPassword" type="password" autocomplete="current-password">
+
+<div class="loginActions">
+
+<button class="btn dark" onclick="superLogin()">
+Login
+</button>
+
+<button class="btn loginBack" onclick="backToLoginOptions()">
+Back
+</button>
+
+</div>
+
+<div id="superMsg"></div>
+
+</div>
+
+</div>
+</div>
+
 <footer>
- <div id="footerName">Maa Basuli Uda Jatra Committee</div>
- <div class="muted" style="color:#ddd;margin-top:8px">Thakurmunda, Mayurbhanj, Odisha</div>
- <div style="margin-top:12px">© <span id="year"></span> Maa Basuli Uda Jatra Committee</div>
+
+<div id="footerName">
+Maa Basuli Uda Jatra Committee
+</div>
+
+<div style="margin-top:8px;color:#ddd">
+Thakurmunda, Mayurbhanj, Odisha
+</div>
+
+<div style="margin-top:12px">
+© <span id="year"></span> Maa Basuli Uda Jatra Committee
+</div>
+
 </footer>
 
 <script>
+
 const SUPABASE_URL="https://nogwmbocptlbgzzpdjny.supabase.co";
+
 const SUPABASE_KEY="sb_publishable_bpa45-FlPLMmt4kBpbveJA_c95Noodr";
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const sb=window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 const DEFAULTS={
- name:"Maa Basuli Uda Jatra Committee",
- tagline:"Maa Basuli Uda Jatra Committee, Thakurmunda",
- location:"Thakurmunda, Mayurbhanj, Odisha",
- phone:"8917437067",
- email:"maabasuliudajatracommittee@gmail.com",
- instagram:"https://www.instagram.com/jaymaabasuli",
- facebook:"https://www.facebook.com/share/14mPPFBt8e4/",
- x:"https://x.com/JayMaaBasuli",
- youtube:"https://www.youtube.com/@jaymaabasuli"
+name:"Maa Basuli Uda Jatra Committee",
+tagline:"Maa Basuli Uda Jatra Committee, Thakurmunda",
+location:"Thakurmunda, Mayurbhanj, Odisha",
+phone:"8917437067",
+email:"maabasuliudajatracommittee@gmail.com",
+instagram:"https://www.instagram.com/jaymaabasuli",
+facebook:"https://www.facebook.com/share/14mPPFBt8e4/",
+x:"https://x.com/JayMaaBasuli",
+youtube:"https://www.youtube.com/@jaymaabasuli"
 };
 
-function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function esc(v){
+
+return String(v??'').replace(
+/[&<>"']/g,
+m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[m])
+);
+
+}
 
 function applySettings(rows){
-  const s={...DEFAULTS};
-  if(!Array.isArray(rows)) return s;
 
-  // Supports a normal one-row settings table and common key/value layouts.
-  if(rows.length===1 && rows[0] && typeof rows[0]==='object'){
-    const r=rows[0];
-    const aliases={
-      name:['site_name','website_name','name','title'],
-      tagline:['tagline','site_tagline'],
-      location:['location','address','contact_address'],
-      phone:['phone','contact_phone','mobile'],
-      email:['email','contact_email'],
-      instagram:['instagram','instagram_url'],
-      facebook:['facebook','facebook_url'],
-      x:['x','twitter','x_url','twitter_url'],
-      youtube:['youtube','youtube_url'],
-      logo:['logo_url','site_logo','logo'],
-      hero:['hero_url','hero_image','banner_url','banner_image']
-    };
-    for(const k of Object.keys(aliases)){
-      for(const a of aliases[k]){
-        if(r[a]!==undefined && r[a]!==null && String(r[a]).trim()!==''){s[k]=r[a];break}
-      }
-    }
-  }
-  for(const r of rows){
-    if(!r || typeof r!=='object') continue;
-    const key=String(r.key??r.setting_key??r.name??'').toLowerCase();
-    const val=r.value??r.setting_value??r.content;
-    if(!key || val===undefined || val===null) continue;
-    const map={
-      site_name:'name',website_name:'name',name:'name',
-      tagline:'tagline',site_tagline:'tagline',
-      location:'location',address:'location',contact_address:'location',
-      phone:'phone',contact_phone:'phone',mobile:'phone',
-      email:'email',contact_email:'email',
-      instagram:'instagram',instagram_url:'instagram',
-      facebook:'facebook',facebook_url:'facebook',
-      x:'x',twitter:'x',x_url:'x',twitter_url:'x',
-      youtube:'youtube',youtube_url:'youtube',
-      logo_url:'logo',site_logo:'logo',logo:'logo',
-      hero_url:'hero',hero_image:'hero',banner_url:'hero',banner_image:'hero'
-    };
-    if(map[key]) s[map[key]]=val;
-  }
-  return s;
+const s={...DEFAULTS};
+
+if(!Array.isArray(rows)) return s;
+
+if(rows.length===1 && rows[0]){
+
+const r=rows[0];
+
+const aliases={
+name:['site_name','website_name','name','title'],
+tagline:['tagline','site_tagline'],
+location:['location','address','contact_address'],
+phone:['phone','contact_phone','mobile'],
+email:['email','contact_email'],
+instagram:['instagram','instagram_url'],
+facebook:['facebook','facebook_url'],
+x:['x','twitter','x_url','twitter_url'],
+youtube:['youtube','youtube_url'],
+logo:['logo_url','site_logo','logo'],
+hero:['hero_url','hero_image','banner_url','banner_image']
+};
+
+for(const k of Object.keys(aliases)){
+
+for(const a of aliases[k]){
+
+if(
+r[a]!==undefined &&
+r[a]!==null &&
+String(r[a]).trim()!==''
+){
+
+s[k]=r[a];
+break;
+
+}
+
+}
+
+}
+
+}
+
+for(const r of rows){
+
+if(!r || typeof r!=='object') continue;
+
+const key=String(
+r.key??r.setting_key??r.name??''
+).toLowerCase();
+
+const val=r.value??r.setting_value??r.content;
+
+if(!key || val===undefined || val===null) continue;
+
+const map={
+
+site_name:'name',
+website_name:'name',
+name:'name',
+
+tagline:'tagline',
+site_tagline:'tagline',
+
+location:'location',
+address:'location',
+contact_address:'location',
+
+phone:'phone',
+contact_phone:'phone',
+mobile:'phone',
+
+email:'email',
+contact_email:'email',
+
+instagram:'instagram',
+instagram_url:'instagram',
+
+facebook:'facebook',
+facebook_url:'facebook',
+
+x:'x',
+twitter:'x',
+x_url:'x',
+twitter_url:'x',
+
+youtube:'youtube',
+youtube_url:'youtube',
+
+logo_url:'logo',
+site_logo:'logo',
+logo:'logo',
+
+hero_url:'hero',
+hero_image:'hero',
+banner_url:'hero',
+banner_image:'hero'
+
+};
+
+if(map[key]) s[map[key]]=val;
+
+}
+
+return s;
+
 }
 
 async function loadSettings(){
-  const r=await sb.from('site_settings').select('*');
-  if(r.error){console.warn('site_settings:',r.error.message);return DEFAULTS}
-  const s=applySettings(r.data);
-  document.title=s.name;
-  siteName.textContent=s.name;
-  footerName.textContent=s.name;
-  heroTagline.textContent=s.tagline;
-  heroLocation.textContent=s.location;
-  contactAddress.textContent=s.location;
-  phoneLink.textContent=s.phone; phoneLink.href='tel:'+s.phone;
-  emailLink.textContent=s.email; emailLink.href='mailto:'+s.email;
-  for(const [id,url] of [['instagram',s.instagram],['facebook',s.facebook],['xlink',s.x],['youtube',s.youtube]]){
-    const e=document.getElementById(id); e.href=url||'#'; if(!url)e.style.display='none';
-  }
-  if(s.logo){siteLogo.src=s.logo;siteLogo.style.display='block'}
-  if(s.hero){document.querySelector('.hero').style.backgroundImage=`linear-gradient(#0008,#0008),url("${String(s.hero).replace(/"/g,'&quot;')}")`;document.querySelector('.hero').style.backgroundSize='cover';document.querySelector('.hero').style.backgroundPosition='center'}
+
+const r=await sb.from('site_settings').select('*');
+
+if(r.error){
+
+console.warn(
+'site_settings:',
+r.error.message
+);
+
+return DEFAULTS;
+
+}
+
+const s=applySettings(r.data);
+
+document.title=s.name;
+
+siteName.textContent=s.name;
+
+footerName.textContent=s.name;
+
+heroTagline.textContent=s.tagline;
+
+heroLocation.textContent=s.location;
+
+contactAddress.textContent=s.location;
+
+phoneLink.textContent=s.phone;
+
+phoneLink.href='tel:'+s.phone;
+
+emailLink.textContent=s.email;
+
+emailLink.href='mailto:'+s.email;
+
+for(
+const [id,url]
+of [
+['instagram',s.instagram],
+['facebook',s.facebook],
+['xlink',s.x],
+['youtube',s.youtube]
+]
+){
+
+const e=document.getElementById(id);
+
+e.href=url||'#';
+
+if(!url)e.style.display='none';
+
+}
+
+if(s.logo){
+
+siteLogo.src=s.logo;
+
+siteLogo.style.display='block';
+
+}
+
+if(s.hero){
+
+document.querySelector('.hero').style.backgroundImage=
+`linear-gradient(#0008,#0008),url("${String(s.hero).replace(/"/g,'&quot;')}")`;
+
+document.querySelector('.hero').style.backgroundSize='cover';
+
+document.querySelector('.hero').style.backgroundPosition='center';
+
+}
+
 }
 
 async function loadAbout(){
-  const r=await sb.from('site_pages').select('*').eq('published',true).eq('slug','about').maybeSingle();
-  if(r.error || !r.data){aboutArea.innerHTML='<p class="empty">About information will be published here.</p>';return}
-  aboutArea.innerHTML='<h3>'+esc(r.data.title)+'</h3><div class="pageContent">'+esc(r.data.content)+'</div>';
+
+const r=await sb
+.from('site_pages')
+.select('*')
+.eq('published',true)
+.eq('slug','about')
+.maybeSingle();
+
+if(r.error || !r.data){
+
+aboutArea.innerHTML=
+'<p class="empty">About information will be published here.</p>';
+
+return;
+
+}
+
+aboutArea.innerHTML=
+'<h3>'+
+esc(r.data.title)+
+'</h3><div class="pageContent">'+
+esc(r.data.content)+
+'</div>';
+
 }
 
 async function loadPages(){
-  const r=await sb.from('site_pages').select('*').eq('published',true).eq('menu_visible',true).neq('slug','about').order('menu_order',{ascending:true});
-  if(r.error){pagesArea.innerHTML='<div class="card"><p>'+esc(r.error.message)+'</p></div>';return}
-  pagesArea.innerHTML=r.data.length?r.data.map(x=>`<div class="card pageBlock"><h3>${esc(x.title)}</h3><div class="pageContent">${esc(x.content)}</div></div>`).join(''):'<div class="card empty">No additional information published.</div>';
+
+const r=await sb
+.from('site_pages')
+.select('*')
+.eq('published',true)
+.eq('menu_visible',true)
+.neq('slug','about')
+.order('menu_order',{ascending:true});
+
+if(r.error){
+
+pagesArea.innerHTML=
+'<div class="card"><p>'+
+esc(r.error.message)+
+'</p></div>';
+
+return;
+
+}
+
+pagesArea.innerHTML=r.data.length?
+
+r.data.map(x=>
+`<div class="card" style="margin-bottom:20px">
+<h3>${esc(x.title)}</h3>
+<div class="pageContent">${esc(x.content)}</div>
+</div>`
+).join(''):
+
+'<div class="card empty">No additional information published.</div>';
+
 }
 
 async function loadNotices(){
-  const r=await sb.from('notices').select('*').eq('is_active',true).order('created_at',{ascending:false});
-  if(r.error){noticeArea.innerHTML='<div class="card"><p>'+esc(r.error.message)+'</p></div>';return}
-  noticeArea.innerHTML=r.data.length?r.data.map(x=>`<article class="card notice"><h3>${esc(x.title)}</h3><div class="pageContent">${esc(x.message)}</div></article>`).join(''):'<div class="card empty">No active notices.</div>';
+
+const r=await sb
+.from('notices')
+.select('*')
+.eq('is_active',true)
+.order('created_at',{ascending:false});
+
+if(r.error){
+
+noticeArea.innerHTML=
+'<div class="card"><p>'+
+esc(r.error.message)+
+'</p></div>';
+
+return;
+
+}
+
+noticeArea.innerHTML=r.data.length?
+
+r.data.map(x=>
+`<article class="card notice">
+<h3>${esc(x.title)}</h3>
+<div class="pageContent">${esc(x.message)}</div>
+</article>`
+).join(''):
+
+'<div class="card empty">No active notices.</div>';
+
 }
 
 async function loadEvents(){
-  const r=await sb.from('events').select('*').eq('is_active',true).order('event_date',{ascending:true});
-  if(r.error){eventArea.innerHTML='<div class="card"><p>'+esc(r.error.message)+'</p></div>';return}
-  eventArea.innerHTML=r.data.length?r.data.map(x=>`<article class="card event">${x.image_url?`<img src="${esc(x.image_url)}" alt="${esc(x.title)}">`:''}<h3>${esc(x.title)}</h3><div class="muted">${esc(x.event_date||'')}</div><div class="pageContent">${esc(x.description||'')}</div></article>`).join(''):'<div class="card empty">No active events.</div>';
+
+const r=await sb
+.from('events')
+.select('*')
+.eq('is_active',true)
+.order('event_date',{ascending:true});
+
+if(r.error){
+
+eventArea.innerHTML=
+'<div class="card"><p>'+
+esc(r.error.message)+
+'</p></div>';
+
+return;
+
+}
+
+eventArea.innerHTML=r.data.length?
+
+r.data.map(x=>
+`<article class="card event">
+${x.image_url?
+`<img src="${esc(x.image_url)}" alt="${esc(x.title)}">`
+:''}
+
+<h3>${esc(x.title)}</h3>
+
+<div class="muted">
+${esc(x.event_date||'')}
+</div>
+
+<div class="pageContent">
+${esc(x.description||'')}
+</div>
+
+</article>`
+).join(''):
+
+'<div class="card empty">No active events.</div>';
+
 }
 
 async function loadGallery(){
-  const r=await sb.from('gallery').select('*').eq('is_active',true).order('display_order',{ascending:true});
-  if(r.error){galleryArea.innerHTML='<div class="card"><p>'+esc(r.error.message)+'</p></div>';return}
-  galleryArea.innerHTML=r.data.length?r.data.map(x=>`<article class="card"><img src="${esc(x.image_url)}" alt="${esc(x.title||'Maa Basuli Uda Jatra')}"><h3>${esc(x.title||'Maa Basuli Uda Jatra')}</h3></article>`).join(''):'<div class="card empty">No gallery photos published.</div>';
+
+const r=await sb
+.from('gallery')
+.select('*')
+.eq('is_active',true)
+.order('display_order',{ascending:true});
+
+if(r.error){
+
+galleryArea.innerHTML=
+'<div class="card"><p>'+
+esc(r.error.message)+
+'</p></div>';
+
+return;
+
 }
 
-async function boot(){
-  year.textContent=new Date().getFullYear();
-  await Promise.all([loadSettings(),loadAbout(),loadPages(),loadNotices(),loadEvents(),loadGallery()]);
+galleryArea.innerHTML=r.data.length?
+
+r.data.map(x=>
+`<article class="card">
+<img src="${esc(x.image_url)}"
+alt="${esc(x.title||'Maa Basuli Uda Jatra')}">
+
+<h3>
+${esc(x.title||'Maa Basuli Uda Jatra')}
+</h3>
+
+</article>`
+).join(''):
+
+'<div class="card empty">No gallery photos published.</div>';
+
 }
-boot();
-</script>
-</body>
-</html>
+
+/* ================= LOGIN SYSTEM ================= */
+
+function openLogin(){
+
+document.getElementById('loginModal').style.display='flex';
+
+backToLoginOptions();
+
+}
+
+function closeLogin(){
+
+document.getElementById('loginModal').style.display='none';
+
+}
+
+function hideLoginForms(){
+
+document
+.querySelectorAll('.loginForm')
+.forEach(x=>x.classList.remove('active'));
+
+}
+
+function showLoginForm(type){
+
+hideLoginForms();
+
+document.getElementById('loginChooser').style.display='none';
+
+document
+.getElementById(
+type==='member'
+?'memberLogin'
+:type==='admin'
+?'adminLogin'
+:'superLogin'
+)
+.classList.add('active');
+
+}
+
+function backToLoginOptions(){
+
+hideLoginForms();
+
+document.getElementById('loginChooser').style.display='block';
+
+}
+
+function showSignup(){
+
+hideLoginForms();
+
+document.getElementById('loginChooser').style.display='none';
+
+document.getElementById('memberSignup')
+.classList.add('active');
+
+}
+
+function loginMessage(id,text,ok=false){
+
+const e=document.getElementById(id);
+
+e.className='loginMsg '+(ok?'ok':'bad');
+
+e.textContent=text;
+
+}
+
+/* MEMBER LOGIN */
+
+async function memberLogin(){
+
+const email=memberEmail.value.trim();
+
+const password=memberPassword.value;
+
+if(!email || !password){
+
+loginMessage(
+'memberMsg',
+'Email and password are required.'
+);
+
+return;
+
+}
+
+const r=await sb.auth.signInWithPassword({
+email,
+password
+});
+
+if(r.error){
+
+loginMessage(
+'memberMsg',
+r.error.message
+);
+
+return;
+
+}
+
+loginMessage(
+'memberMsg',
+'Login successful.',
+true
+);
+
+}
+
+/* MEMBER SIGNUP */
+
+async function memberSignup(){
+
+const name=signupName.value.trim();
+
+const mobile=signupMobile.value.trim();
+
+const email=signupEmail.value.trim();
+
+const password=signupPassword.value;
+
+const confirm=signupConfirm.value;
+
+if(
+!name ||
+!mobile ||
+!email ||
+!password ||
+!confirm
+){
+
+loginMessage(
+'signupMsg',
+'All fields are required.'
+);
+
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+loginMessage(
+'signupMsg',
+'Enter a valid 10-digit mobile number.'
+);
+
+return;
+
+}
+
+if(password!==confirm){
+
+loginMessage(
+'signupMsg',
+'Password and Confirm Password do not match.'
+);
+
+return;
+
+}
+
+/*
+Server-side unique mobile constraint must remain
+enforced in Supabase.
+This frontend check only gives a friendly message.
+*/
+
+const existing=await sb
+.from('members')
+.select('id')
+.eq('mobile',mobile)
+.maybeSingle();
+
+if(!existing.error && existing.data){
+
+loginMessage(
+'signupMsg',
+'This mobile number is already linked to a member account.'
+);
+
+return;
+
+}
+
+const r=await sb.auth.signUp({
+
+email,
+password,
+
+options:{
+data:{
+full_name:name,
+mobile:mobile
+}
+}
+
+});
+
+if(r.error){
+
+loginMessage(
+'signupMsg',
+r.error.message
+);
+
+return;
+
+}
+
+loginMessage(
+'signupMsg',
+'Account created. Please verify your email before logging in.',
+true
+);
+
+}
+
+/* ADMIN LOGIN */
+
+async function adminLogin(){
+
+const email=adminEmail.value.trim();
+
+const password=adminPassword.value;
+
+if(!email || !password){
+
+loginMessage(
+'adminMsg',
+'Admin Login ID and password are required.'
+);
+
+return;
+
+}
+
+const r=await sb.auth.signInWithPassword({
+email,
+password
+});
+
+if(r.error){
+
+loginMessage(
+'adminMsg',
+r.error.message
+);
+
+return;
+
+}
+
+await verifyRoleAndGo(
+'admin',
+'adminMsg'
+);
+
+}
+
+/* SUPER ADMIN LOGIN */
+
+async function superLogin(){
+
+const email=superEmail.value.trim();
+
+const password=superPassword.value;
+
+if(!email || !password){
+
+loginMessage(
+'superMsg',
+'Email and password are required.'
+);
+
+return;
+
+}
+
+const r=await sb.auth.signInWithPassword({
+email,
+password
+});
+
+if(r.error){
+
+loginMessage(
+'superMsg',
+r.error.message
+);
+
+return;
+
+}
+
+await verifyRoleAndGo(
+'super_admin',
+'superMsg'
+);
+
+}
+
+async function verifyRoleAndGo(
+expectedRole,
+msgId
+){
+
+const u=await sb.auth.getUser();
+
+if(
+u.error ||
+!u.data.user
+){
+
+loginMessage(
+msg
